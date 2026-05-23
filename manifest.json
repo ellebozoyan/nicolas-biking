@@ -1,0 +1,15 @@
+{
+  "name": "Nicolas's Biking",
+  "short_name": "Biking",
+  "description": "Nicolas's complete biking playbook — bike parts, rules, skills, drills, games, and songs",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f8f4ea",
+  "theme_color": "#2c6a8d",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}

@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+<title>Nicolas's Biking</title>
+
+<!-- PWA - Installable app on iPad / iPhone home screen -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Biking" />
+<meta name="theme-color" content="#2c6a8d" />
+<meta name="format-detection" content="telephone=no" />
+
+<!-- App icons (inline SVG, base64-encoded so no separate files needed) -->
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM3ZmIwNjkiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyZDRhMmIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiByeT0iNDAiIGZpbGw9InVybCgjZykiLz48Y2lyY2xlIGN4PSI5MCIgY3k9IjkwIiByPSI1MCIgZmlsbD0iI2Q0ZGQyYiIvPjxwYXRoIGQ9Ik00MCA5MCBRIDkwIDQwIDE0MCA5MCIgc3Ryb2tlPSIjZmFmNmU5IiBzdHJva2Utd2lkdGg9IjMuNSIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik00MCA5MCBRIDkwIDE0MCAxNDAgOTAiIHN0cm9rZT0iI2ZhZjZlOSIgc3Ryb2tlLXdpZHRoPSIzLjUiIGZpbGw9Im5vbmUiLz48L3N2Zz4=" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM3ZmIwNjkiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyZDRhMmIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiByeT0iNDAiIGZpbGw9InVybCgjZykiLz48Y2lyY2xlIGN4PSI5MCIgY3k9IjkwIiByPSI1MCIgZmlsbD0iI2Q0ZGQyYiIvPjxwYXRoIGQ9Ik00MCA5MCBRIDkwIDQwIDE0MCA5MCIgc3Ryb2tlPSIjZmFmNmU5IiBzdHJva2Utd2lkdGg9IjMuNSIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik00MCA5MCBRIDkwIDE0MCAxNDAgOTAiIHN0cm9rZT0iI2ZhZjZlOSIgc3Ryb2tlLXdpZHRoPSIzLjUiIGZpbGw9Im5vbmUiLz48L3N2Zz4=" />
+<link rel="manifest" href="manifest.json" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #f8f4ea;
+    --cream-deep: #f3edd8;
+    --sky: #4a90b8;
+    --sky-deep: #2c6a8d;
+    --hivis: #f5d547;
+    --alert-red: #c73e3a;
+    --clay-deep: #b85528;
+    --net-white: #ffffff;
+    --line-white: #fdfaf2;
+    --shadow-warm: rgba(45, 74, 43, 0.12);
+    --ink: #2d4a1b;
+    --ink-soft: #4a6446;
+    --highlight: #ffd966;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth; -webkit-text-size-adjust: 100%;}
+  body{
+    font-family:'Plus Jakarta Sans', -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 17px;
+    background-image: 
+      radial-gradient(circle at 20% 10%, rgba(245,213,71,0.08), transparent 40%),
+      radial-gradient(circle at 80% 60%, rgba(199,62,58,0.06), transparent 40%);
+    min-height: 100vh;
+    /* iOS safe-area for installed PWA */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  /* Allow text selection in inputs etc */
+  input, textarea {-webkit-user-select: text; user-select: text;}
+
+  /* IN-APP VIDEO PLAYER OVERLAY */
+  #video-overlay{
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 10000;
+    display: none;
+    flex-direction: column;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  #video-overlay.show{display: flex;}
+  #video-overlay-bar{
+    background: var(--sky-deep);
+    color: var(--cream);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  #video-overlay-back{
+    background: var(--hivis);
+    color: var(--sky-deep);
+    border: none;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  #video-overlay-back:active{transform: scale(0.97);}
+  #video-overlay-title{
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    flex: 1;
+    text-align: center;
+    margin: 0 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  #video-overlay-frame-wrap{
+    flex: 1;
+    background: #000;
+    position: relative;
+  }
+  #video-overlay-frame{
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  h1,h2,h3,h4{font-family:'Fraunces', Georgia, serif; color: var(--ink); line-height:1.15;}
+  h1{font-size:clamp(2.2rem, 5vw, 3.6rem); font-weight:800; letter-spacing:-0.02em;}
+  h2{font-size:clamp(1.6rem, 3.5vw, 2.4rem); font-weight:700; letter-spacing:-0.015em;}
+  h3{font-size:clamp(1.2rem, 2.5vw, 1.5rem); font-weight:700;}
+  h4{font-size:1.05rem; font-weight:700; color: var(--sky-deep);}
+  p{margin: 0 0 0.85em 0;}
+  a{color: var(--alert-red-deep); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px;}
+  a:hover{color: var(--sky-deep);}
+
+  /* HEADER */
+  .top-banner{
+    background: linear-gradient(135deg, var(--sky) 0%, var(--sky-deep) 100%);
+    color: var(--cream);
+    padding: 2.2rem 1.5rem 2.2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .top-banner::before{
+    content: '';
+    position:absolute; inset:0;
+    background-image: 
+      repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(255,255,255,0.025) 18px, rgba(255,255,255,0.025) 19px);
+    pointer-events:none;
+  }
+  .top-banner h1{color: var(--cream); font-style: italic;}
+  .top-banner .sub{
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-top: 0.4rem;
+    opacity: 0.88;
+  }
+  .ball-icon{
+    display:inline-block;
+    width: 1.1em; height: 1.1em;
+    background: var(--hivis);
+    border-radius: 50%;
+    vertical-align: middle;
+    box-shadow: inset -3px -3px 8px rgba(45,74,43,0.25);
+    position: relative;
+  }
+  .ball-icon::before, .ball-icon::after{
+    content:''; position:absolute;
+    border: 1.5px solid var(--cream);
+    border-radius: 50%;
+    inset: 0;
+    border-color: transparent var(--cream) transparent var(--cream);
+    transform: rotate(-15deg);
+  }
+
+  /* TAB NAV */
+  .tabs{
+    position: sticky;
+    top: 0;
+    background: var(--cream);
+    border-bottom: 2px solid var(--cream-deep);
+    box-shadow: 0 2px 12px var(--shadow-warm);
+    z-index: 100;
+    padding: 0.75rem;
+  }
+  .tab-list{
+    display: flex;
+    gap: 0.4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    padding-bottom: 4px;
+  }
+  .tab-list::-webkit-scrollbar{height:4px}
+  .tab-list::-webkit-scrollbar-thumb{background:var(--sky);border-radius:2px}
+  .tab-btn{
+    flex: 0 0 auto;
+    background: var(--cream-deep);
+    color: var(--ink);
+    border: 2px solid transparent;
+    padding: 0.65rem 1.1rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    min-height: 44px;
+  }
+  .tab-btn:hover{background: var(--hivis);}
+  .tab-btn.active{
+    background: var(--sky-deep);
+    color: var(--hivis);
+    border-color: var(--sky-deep);
+  }
+
+  /* MAIN CONTENT */
+  main{max-width: 1200px; margin: 0 auto; padding: 2rem 1.25rem 4rem;}
+  .panel{display:none; animation: fadeIn 0.4s ease;}
+  .panel.active{display:block;}
+  @keyframes fadeIn{
+    from{opacity:0; transform:translateY(8px)}
+    to{opacity:1; transform:translateY(0)}
+  }
+
+  .section-intro{
+    background: var(--cream-deep);
+    border-left: 6px solid var(--alert-red);
+    padding: 1.4rem 1.6rem;
+    border-radius: 0 14px 14px 0;
+    margin-bottom: 2rem;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+  }
+
+  /* CARDS */
+  .card-grid{
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .card{
+    background: var(--net-white);
+    border: 2px solid var(--cream-deep);
+    border-radius: 18px;
+    padding: 1.4rem;
+    box-shadow: 0 4px 16px var(--shadow-warm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:hover{transform: translateY(-2px); box-shadow: 0 8px 24px var(--shadow-warm);}
+  .card-icon{
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--hivis), #b8c425);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    box-shadow: 0 3px 8px rgba(184,196,37,0.4);
+  }
+  .card h3{margin-bottom: 0.5rem;}
+  .card .summary{
+    color: var(--ink-soft);
+    font-size: 0.97rem;
+    margin: 0.6rem 0 0.9rem;
+  }
+  .card .video-link{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--alert-red);
+    color: var(--cream);
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .card .video-link:hover{background: var(--alert-red-deep); color: var(--cream);}
+
+  /* COURT SVG WRAPPER */
+  .court-wrap{
+    background: var(--net-white);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 16px var(--shadow-warm);
+  }
+  .court-wrap svg{width:100%; height:auto; max-height:420px; display:block;}
+  .court-legend{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.7rem;
+    margin-top: 1.2rem;
+  }
+  .legend-item{
+    background: var(--cream-deep);
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+  }
+  .legend-item strong{color: var(--sky-deep); display:block; margin-bottom:0.15rem;}
+
+  /* WEEK CARDS */
+  .quarter{
+    background: var(--cream-deep);
+    border-radius: 18px;
+    padding: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+  .quarter-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+  }
+  .quarter-tag{
+    background: var(--sky-deep);
+    color: var(--hivis);
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .week-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0.7rem;
+  }
+  .week-card{
+    background: var(--net-white);
+    padding: 0.95rem 1.1rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--sky);
+    transition: transform 0.15s;
+  }
+  .week-card:hover{transform: translateX(3px);}
+  .week-card .wk-num{
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    color: var(--alert-red);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .week-card h4{margin: 0.15rem 0 0.4rem;}
+  .week-card p{font-size: 0.9rem; color: var(--ink-soft); margin: 0;}
+
+  /* SOCIAL STORY */
+  .story-book{
+    background: var(--net-white);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 6px 24px var(--shadow-warm);
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .story-page{
+    background: var(--cream-deep);
+    border-radius: 16px;
+    padding: 1.8rem 1.6rem;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .story-page .emoji{
+    font-size: 2.8rem;
+    flex-shrink: 0;
+    background: var(--hivis);
+    width: 78px; height: 78px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 3px 10px rgba(184,196,37,0.4);
+  }
+  .story-page .text{
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .story-num{
+    color: var(--alert-red);
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* RESOURCES */
+  .resource-block{
+    background: var(--net-white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    border: 2px solid var(--cream-deep);
+  }
+  .resource-block h3{
+    color: var(--alert-red-deep);
+    margin-bottom: 0.5rem;
+  }
+  .resource-block ul{margin: 0.5rem 0 0 1.2rem; padding: 0;}
+  .resource-block li{margin-bottom: 0.5rem;}
+
+  /* HIGHLIGHT BOX */
+  .pull-quote{
+    background: var(--sky-deep);
+    color: var(--cream);
+    padding: 1.6rem 1.8rem;
+    border-radius: 18px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    margin: 1.5rem 0;
+    text-align: center;
+  }
+  .pull-quote::before{
+    content: '"';
+    font-size: 3rem;
+    line-height: 0.5;
+    vertical-align: -0.3em;
+    color: var(--hivis);
+  }
+  .pull-quote::after{
+    content: '"';
+    font-size: 3rem;
+    line-height: 0;
+    vertical-align: -0.5em;
+    color: var(--hivis);
+  }
+
+  /* Equipment cards */
+  .equip-row{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .equip-item{
+    background: var(--cream-deep);
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .equip-circle{
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    margin: 0 auto 0.5rem;
+    box-shadow: inset -4px -4px 10px rgba(0,0,0,0.18);
+    position: relative;
+  }
+  .equip-circle::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius:50%;
+    border-color: transparent rgba(255,255,255,0.6) transparent rgba(255,255,255,0.6);
+  }
+  .ball-red{background: linear-gradient(135deg, #d44a3a, #a83523);}
+  .ball-orange{background: linear-gradient(135deg, #e08838, #b8651f);}
+  .ball-green{background: linear-gradient(135deg, #6fa84d, #4f8a3d);}
+  .ball-yellow{background: linear-gradient(135deg, #f5d547, #a8b020);}
+
+  /* FORMAT CARDS */
+  .format-card{
+    background: var(--net-white);
+    border-radius: 22px;
+    padding: 1.6rem;
+    margin-bottom: 1.4rem;
+    box-shadow: 0 6px 20px var(--shadow-warm);
+    border-top: 8px solid;
+  }
+  .format-A{border-top-color: var(--sky);}
+  .format-B{border-top-color: var(--hivis);}
+  .format-C{border-top-color: var(--alert-red);}
+  .format-D{border-top-color: #6b4f8f;}
+  .format-tag{
+    display: inline-block;
+    padding: 0.3rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+  .tag-A{background: var(--sky); color: var(--cream);}
+  .tag-B{background: var(--hivis); color: var(--sky-deep);}
+  .tag-C{background: var(--alert-red); color: var(--cream);}
+  .tag-D{background: #6b4f8f; color: var(--cream);}
+  .format-when{
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin: 0.3rem 0 1rem;
+  }
+  .format-versions{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  @media (min-width: 720px){
+    .format-versions{grid-template-columns: 1.2fr 1fr;}
+  }
+  .version-block{
+    background: var(--cream-deep);
+    border-radius: 14px;
+    padding: 1.1rem 1.2rem;
+  }
+  .version-block h4{
+    color: var(--sky-deep);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .version-block h4 .duration{
+    font-size: 0.78rem;
+    background: var(--sky-deep);
+    color: var(--hivis);
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .block-list{list-style: none; padding: 0; margin: 0;}
+  .block-list li{
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed rgba(45,74,43,0.15);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: 0.93rem;
+  }
+  .block-list li:last-child{border-bottom: none;}
+  .block-list .blk-time{
+    flex-shrink: 0;
+    background: var(--net-white);
+    color: var(--sky-deep);
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    min-width: 52px;
+    text-align: center;
+  }
+  .block-list .blk-name{font-weight: 600; display: block;}
+  .block-list .blk-desc{color: var(--ink-soft); font-size: 0.86rem; display: block;}
+
+  /* PHASE BANNER */
+  .phase{
+    background: linear-gradient(135deg, var(--sky-deep) 0%, var(--sky) 100%);
+    color: var(--cream);
+    padding: 1.4rem 1.6rem;
+    border-radius: 18px;
+    margin: 2rem 0 1.2rem;
+  }
+  .phase h3{color: var(--cream); margin-bottom: 0.3rem;}
+  .phase .phase-meta{
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.6rem;
+  }
+  .phase-chip{
+    background: rgba(255,255,255,0.18);
+    color: var(--cream);
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .phase p{color: rgba(250,246,233,0.92); margin: 0.5rem 0 0;}
+
+  /* WEEK ROW with format colors */
+  .week-row{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+    gap: 0.7rem;
+    margin-bottom: 1.5rem;
+  }
+  .week-row .week-card{border-left-width: 5px;}
+  .week-card.fmt-A{border-left-color: var(--sky);}
+  .week-card.fmt-B{border-left-color: var(--hivis);}
+  .week-card.fmt-C{border-left-color: var(--alert-red);}
+  .week-card.fmt-D{border-left-color: #6b4f8f;}
+  .fmt-pill{
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 0.12rem 0.5rem;
+    border-radius: 4px;
+    margin-left: 0.45rem;
+    letter-spacing: 0.05em;
+    vertical-align: middle;
+  }
+  .fmt-pill.A{background: var(--sky); color: var(--cream);}
+  .fmt-pill.B{background: var(--hivis); color: var(--sky-deep);}
+  .fmt-pill.C{background: var(--alert-red); color: var(--cream);}
+  .fmt-pill.D{background: #6b4f8f; color: var(--cream);}
+
+  /* WARM-UP MENU */
+  .warmup-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.7rem;
+  }
+  .warmup-item{
+    background: var(--cream-deep);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    border-left: 3px solid var(--alert-red);
+  }
+  .warmup-item h4{font-size: 0.95rem; margin-bottom: 0.2rem;}
+  .warmup-item p{font-size: 0.85rem; color: var(--ink-soft); margin: 0;}
+
+  /* INLINE WEEKLY VIDEO LINK */
+  .wk-vid{
+    display: inline-block;
+    margin-top: 0.4rem;
+    color: var(--alert-red-deep);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    background: var(--cream-deep);
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--alert-red);
+  }
+  .wk-vid:hover{
+    background: var(--alert-red);
+    color: var(--cream);
+  }
+
+  /* Card video link for games */
+  .game-vid{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.6rem;
+    background: transparent;
+    color: var(--alert-red-deep);
+    padding: 0.3rem 0.7rem;
+    border: 1.5px solid var(--alert-red);
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .game-vid:hover{background: var(--alert-red); color: var(--cream);}
+
+  /* SONG CARDS */
+  .song-card{
+    background: linear-gradient(135deg, #fffaeb, var(--cream));
+    border: 2px solid var(--cream-deep);
+    position: relative;
+    overflow: hidden;
+  }
+  .song-card::before{
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, rgba(245,213,71,0.3), transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .song-card .song-id{
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    font-family: 'Courier New', monospace;
+    margin-top: 0.5rem;
+    opacity: 0.65;
+  }
+  .play-button{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: linear-gradient(135deg, var(--sky), var(--sky-deep));
+    color: var(--cream);
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 0.8rem;
+    box-shadow: 0 3px 10px rgba(45,74,43,0.25);
+    transition: transform 0.15s;
+  }
+  .play-button:hover{
+    transform: translateY(-2px);
+    color: var(--hivis);
+    box-shadow: 0 5px 14px rgba(45,74,43,0.35);
+  }
+  .play-button .icon{
+    font-size: 1.05rem;
+    background: var(--hivis);
+    color: var(--sky-deep);
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .song-add{
+    background: var(--cream-deep);
+    border: 2.5px dashed var(--sky);
+    border-radius: 18px;
+    padding: 1.4rem;
+    text-align: center;
+  }
+  .song-add .card-icon{
+    background: linear-gradient(135deg, var(--cream), var(--cream-deep)) !important;
+    color: var(--sky-deep);
+    border: 2px dashed var(--sky);
+  }
+  .song-add ol{
+    text-align: left;
+    margin: 0.8rem 0 0 1.2rem;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+  }
+  .song-add ol li{margin-bottom: 0.3rem;}
+
+  .song-uses{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.7rem;
+    margin-top: 1rem;
+  }
+  .song-use{
+    background: var(--net-white);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    border-left: 3px solid var(--hivis);
+  }
+  .song-use h4{
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+    color: var(--sky-deep);
+  }
+  .song-use p{
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* CUE CHIP — for cards (skills, rules, court, games, etc.) */
+  .cue{
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--sky-deep);
+    margin-top: 0.65rem;
+    padding: 0.4rem 0.75rem;
+    background: rgba(212, 221, 43, 0.22);
+    border-left: 3px solid var(--hivis);
+    border-radius: 0 8px 8px 0;
+    line-height: 1.35;
+  }
+  .cue::before{
+    content: '💬';
+    margin-right: 0.4rem;
+    font-style: normal;
+  }
+  /* Tighter cue for legend items and warmup items */
+  .legend-item .cue, .warmup-item .cue{
+    font-size: 0.84rem;
+    margin-top: 0.4rem;
+    padding: 0.3rem 0.6rem;
+  }
+  /* Block cue inside lesson format lists */
+  .blk-cue{
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--alert-red-deep);
+    margin-top: 0.25rem;
+  }
+  .blk-cue::before{
+    content: '💬 ';
+    font-style: normal;
+  }
+
+  /* Print friendly */
+  @media print{
+    .tabs{display:none}
+    .panel{display:block !important; page-break-after: always;}
+    body{background: white;}
+  }
+
+  @media (max-width: 640px){
+    main{padding: 1.25rem 0.85rem 3rem;}
+    .top-banner{padding: 1.5rem 1rem;}
+    .story-page{flex-direction:column; text-align:center; padding: 1.4rem 1.1rem;}
+    .story-page .text{font-size: 1.1rem;}
+  }
+
+  /* Court SVG specific */
+  .court-svg .court-bg{fill: #4a7c2c;}
+  .court-svg .court-line{stroke: var(--line-white); stroke-width: 3; fill: none;}
+  .court-svg .net{stroke: #2d2d2d; stroke-width: 4;}
+  .court-svg .label{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    fill: var(--cream);
+  }
+  .court-svg .label-dark{
+    fill: var(--sky-deep);
+    font-weight: 700;
+  }
+  .court-svg .arrow{stroke: var(--alert-red-deep); stroke-width: 2; fill: none; marker-end: url(#arrowhead);}
+
+/* In-app Suno song manager */
+.user-songs-section { margin: 1rem 0 1.5rem; }
+.add-song-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.85rem 1.6rem;
+  background: linear-gradient(135deg, #4a7c2c, #2d4a1b);
+  color: #fff !important;
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: inherit;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  text-decoration: none;
+}
+.add-song-btn:hover { transform: translateY(-1px); }
+.add-song-btn:active { transform: translateY(1px); }
+.user-songs-empty {
+  margin-top: 0.7rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+.song-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+.song-modal-overlay[hidden] { display: none !important; }
+.song-modal-box {
+  background: var(--cream, #f8f4ea);
+  padding: 1.5rem;
+  border-radius: 18px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+.song-modal-box h3 { margin: 0 0 1rem; }
+.song-modal-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0.6rem 0 0.3rem;
+  color: var(--ink-soft, #555);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.song-modal-box input {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border: 2px solid var(--cream-deep, #ddd);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background: #fff;
+}
+.song-modal-box input:focus {
+  outline: none;
+  border-color: #888;
+}
+.song-modal-hint {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin: 0.3rem 0 0;
+}
+.song-modal-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-top: 1.3rem;
+}
+.song-modal-btn {
+  padding: 0.7rem 1.3rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+.song-modal-btn.cancel { background: var(--cream-deep, #eee); color: var(--ink, #333); }
+.song-modal-btn.save  { background: linear-gradient(135deg, #4a7c2c, #2d4a1b); color: #fff; }
+.song-card-remove {
+  display: inline-block;
+  margin-top: 0.7rem;
+  font-size: 0.78rem;
+  background: none;
+  border: none;
+  color: var(--ink-soft, #888);
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: inherit;
+  padding: 0;
+}
+.song-card-remove:hover { color: #c73e3a; }
+
+</style>
+</head>
+<body>
+
+<header class="top-banner">
+  <h1>Nicolas's Biking Playbook <span class="ball-icon"></span></h1>
+  <p class="sub">A picture guide to the rules, the field, the strokes, and the joy of the game.</p>
+</header>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="tab-list" role="tablist">
+    <button class="tab-btn active" data-tab="welcome">🏁 Start Here</button>
+    <button class="tab-btn" data-tab="bike">🚴 The Bike</button>
+    <button class="tab-btn" data-tab="rules">📋 Rules</button>
+    <button class="tab-btn" data-tab="skills">🎯 Skills &amp; Moves</button>
+    <button class="tab-btn" data-tab="program">📅 Lesson Plans</button>
+    <button class="tab-btn" data-tab="games">🎮 Fun Games</button>
+    <button class="tab-btn" data-tab="story">📖 Biking Story</button>
+    <button class="tab-btn" data-tab="songs">🎵 Biking Songs</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- WELCOME -->
+<section class="panel active" id="welcome">
+  <div class="section-intro">
+    Welcome, Nicolas. You already know how to ride a bike — or you're about to. Now we're going to learn <em>everything that goes with it</em> — every part of the bike, every rule of the road, every skill that makes a rider good. Take your time. Look at the pictures. Watch a video. Try a drill. Biking is not about being perfect. It's about getting curious, building good habits, and finding the joy of two wheels and the open road. And the best part — biking is a freedom you can have for the rest of your life.
+  </div>
+
+  <h2>What's inside this playbook</h2>
+  <div class="card-grid" style="margin-top:1.2rem">
+    <div class="card">
+      <div class="card-icon">🏟️</div>
+      <h3>The Court</h3>
+      <p class="summary">A picture map of the bike with every part named — frame, brakes, gears, helmet, all of it.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📋</div>
+      <h3>The Rules</h3>
+      <p class="summary">10 simple rules. One picture for each. Watch a short video to see it in action.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h3>Skills &amp; Moves</h3>
+      <p class="summary">Forehand, backhand, serve, volley, overhead. How to grip, how to swing, how to follow through.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📅</div>
+      <h3>Lesson Plans</h3>
+      <p class="summary">Four lesson formats that roll in over the year — one at a time. Same predictable shape every time, so what's inside can stay fresh. 30-min and 60-min versions for Daddy and Coach.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎮</div>
+      <h3>Fun Games</h3>
+      <p class="summary">12 silly, challenging, joyful games to play with Daddy or Coach when practice needs a smile.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📖</div>
+      <h3>Your Biking Story</h3>
+      <p class="summary">A picture story about a biking day — what to expect, what to do, what to feel.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎵</div>
+      <h3>Biking Songs</h3>
+      <p class="summary">Custom Suno songs made just for you. Listen before practice to get ready, or after a great game to celebrate. Add new ones anytime.</p>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    The best rider is not the fastest one. The best rider is the one who keeps showing up, keeps building skills, and remembers to smile after a great ride.
+  </div>
+</section>
+
+<!-- FIELD -->
+<section class="panel" id="bike">
+  <div class="section-intro">
+    Every part of a bike has a name and a job. Knowing the parts helps you understand how to ride, how to fix small problems, and what to ask for at the shop.
+  </div>
+
+  <div class="court-wrap">
+    <svg class="court-svg" viewBox="0 0 800 460" xmlns="http://www.w3.org/2000/svg" aria-label="Bike parts diagram">
+      <!-- Sky background -->
+      <rect x="0" y="0" width="800" height="460" fill="#bce3f0"/>
+      <!-- Ground line -->
+      <line x1="0" y1="380" x2="800" y2="380" stroke="#6B4520" stroke-width="2"/>
+      <rect x="0" y="380" width="800" height="80" fill="#a89373"/>
+
+      <!-- Bike: side view (facing right) -->
+      <!-- Rear wheel -->
+      <circle cx="220" cy="320" r="60" fill="none" stroke="#2d2d2d" stroke-width="6"/>
+      <circle cx="220" cy="320" r="60" fill="#2d2d2d" opacity="0.15"/>
+      <circle cx="220" cy="320" r="8" fill="#5a5a5a"/>
+      <!-- Spokes -->
+      <g stroke="#5a5a5a" stroke-width="1.5">
+        <line x1="220" y1="260" x2="220" y2="380"/>
+        <line x1="160" y1="320" x2="280" y2="320"/>
+        <line x1="178" y1="278" x2="262" y2="362"/>
+        <line x1="262" y1="278" x2="178" y2="362"/>
+      </g>
+      <!-- Front wheel -->
+      <circle cx="580" cy="320" r="60" fill="none" stroke="#2d2d2d" stroke-width="6"/>
+      <circle cx="580" cy="320" r="60" fill="#2d2d2d" opacity="0.15"/>
+      <circle cx="580" cy="320" r="8" fill="#5a5a5a"/>
+      <g stroke="#5a5a5a" stroke-width="1.5">
+        <line x1="580" y1="260" x2="580" y2="380"/>
+        <line x1="520" y1="320" x2="640" y2="320"/>
+        <line x1="538" y1="278" x2="622" y2="362"/>
+        <line x1="622" y1="278" x2="538" y2="362"/>
+      </g>
+
+      <!-- Frame: triangle made of tubes -->
+      <!-- Down tube -->
+      <line x1="280" y1="240" x2="450" y2="290" stroke="#c73e3a" stroke-width="12" stroke-linecap="round"/>
+      <!-- Seat tube -->
+      <line x1="280" y1="240" x2="220" y2="320" stroke="#c73e3a" stroke-width="12" stroke-linecap="round"/>
+      <!-- Top tube -->
+      <line x1="280" y1="240" x2="440" y2="225" stroke="#c73e3a" stroke-width="12" stroke-linecap="round"/>
+      <!-- Chainstays -->
+      <line x1="220" y1="320" x2="450" y2="290" stroke="#c73e3a" stroke-width="10" stroke-linecap="round"/>
+      <!-- Seat stays -->
+      <line x1="220" y1="320" x2="280" y2="240" stroke="#c73e3a" stroke-width="10" stroke-linecap="round"/>
+      <!-- Head tube + fork -->
+      <line x1="440" y1="225" x2="580" y2="320" stroke="#c73e3a" stroke-width="12" stroke-linecap="round"/>
+
+      <!-- Crank/bottom bracket -->
+      <circle cx="450" cy="290" r="12" fill="#5a5a5a"/>
+      <!-- Crank arm -->
+      <line x1="450" y1="290" x2="430" y2="330" stroke="#3a3a3a" stroke-width="6" stroke-linecap="round"/>
+      <!-- Pedal -->
+      <rect x="420" y="326" width="22" height="8" fill="#1a1a1a" rx="2"/>
+      <!-- Chain -->
+      <line x1="450" y1="290" x2="220" y2="320" stroke="#3a3a3a" stroke-width="2.5" stroke-dasharray="4,2"/>
+
+      <!-- Seat post + seat -->
+      <line x1="280" y1="240" x2="280" y2="200" stroke="#3a3a3a" stroke-width="4"/>
+      <path d="M 260 200 L 305 195 L 305 205 L 260 210 Z" fill="#1a1a1a"/>
+
+      <!-- Handlebar + stem -->
+      <line x1="440" y1="225" x2="450" y2="180" stroke="#3a3a3a" stroke-width="6" stroke-linecap="round"/>
+      <line x1="420" y1="170" x2="480" y2="170" stroke="#3a3a3a" stroke-width="6" stroke-linecap="round"/>
+      <!-- Handlebar grips -->
+      <rect x="412" y="165" width="10" height="14" rx="3" fill="#1a1a1a"/>
+      <rect x="478" y="165" width="10" height="14" rx="3" fill="#1a1a1a"/>
+      <!-- Brake lever -->
+      <line x1="478" y1="170" x2="495" y2="180" stroke="#5a5a5a" stroke-width="3" stroke-linecap="round"/>
+
+      <!-- Helmet (placed on top of seat post in a kid-friendly visual cue) -->
+      <g transform="translate(700,100)">
+        <path d="M 0 30 Q 0 0, 30 0 Q 60 0, 60 30 L 55 35 L 5 35 Z" fill="#f5d547" stroke="#c9a91f" stroke-width="2"/>
+        <path d="M 5 35 L 15 50 L 25 50 L 30 38 L 35 50 L 45 50 L 55 35 Z" fill="#f5d547" stroke="#c9a91f" stroke-width="1"/>
+      </g>
+
+      <!-- Labels with leader lines -->
+      <g font-family="Plus Jakarta Sans, sans-serif" font-size="12" font-weight="700" fill="#1c3a5e">
+        <!-- Wheel -->
+        <text x="220" y="430" text-anchor="middle">REAR WHEEL &amp; TIRE</text>
+        <text x="580" y="430" text-anchor="middle">FRONT WHEEL &amp; TIRE</text>
+        <!-- Frame -->
+        <text x="400" y="270" text-anchor="middle" fill="#c73e3a">FRAME</text>
+        <!-- Crank/pedal -->
+        <text x="450" y="380" text-anchor="middle">PEDAL &amp; CRANK</text>
+        <line x1="440" y1="368" x2="435" y2="332" stroke="#1c3a5e" stroke-width="1"/>
+        <!-- Chain -->
+        <text x="335" y="320" text-anchor="middle" font-size="11">CHAIN</text>
+        <!-- Seat -->
+        <text x="280" y="180" text-anchor="middle">SEAT (SADDLE)</text>
+        <!-- Handlebar -->
+        <text x="450" y="155" text-anchor="middle">HANDLEBARS</text>
+        <!-- Brake lever -->
+        <text x="540" y="175" text-anchor="middle" font-size="11">BRAKE LEVER</text>
+        <line x1="510" y1="175" x2="495" y2="180" stroke="#1c3a5e" stroke-width="1"/>
+        <!-- Helmet -->
+        <text x="730" y="170" text-anchor="middle" fill="#c9a91f" font-weight="800">HELMET ⭐</text>
+        <text x="730" y="185" text-anchor="middle" font-size="9" font-style="italic" fill="#c9a91f">always wear one!</text>
+      </g>
+    </svg>
+  </div>
+
+  <h3 style="margin: 1.2rem 0 0.7rem">The parts and what they do</h3>
+  <div class="court-legend">
+    <div class="legend-item"><strong>Helmet ⭐</strong> The MOST important piece. Two finger widths above the eyebrows, straps in a V around the ears, snug under the chin. Wear it EVERY ride.<span class="cue">"Helmet on first."</span></div>
+    <div class="legend-item"><strong>Frame</strong> The metal triangle that holds everything together. Has a top tube, down tube, seat tube, and stays.<span class="cue">"The skeleton."</span></div>
+    <div class="legend-item"><strong>Wheels &amp; tires</strong> Two of them. Tires need air — squeeze them every ride. If you can squish them easy, they need a pump.<span class="cue">"Check the air."</span></div>
+    <div class="legend-item"><strong>Spokes</strong> The thin wires from the hub to the rim of each wheel. Like a wagon wheel.<span class="cue">"Keep them clear."</span></div>
+    <div class="legend-item"><strong>Handlebars</strong> What you hold to steer. Two hands on the grips. Keep them light — don't squeeze too hard.<span class="cue">"Light hands."</span></div>
+    <div class="legend-item"><strong>Brake levers</strong> On the handlebars. Right hand = REAR brake (usually). Left hand = FRONT brake (usually). Squeeze BOTH together to stop smoothly.<span class="cue">"Both levers together."</span></div>
+    <div class="legend-item"><strong>Seat (saddle)</strong> Where you sit. Should be at the height where your leg is almost straight when the pedal is at the bottom.<span class="cue">"Almost straight leg."</span></div>
+    <div class="legend-item"><strong>Pedals</strong> What you push with your feet. Push DOWN through the ball of your foot, not the arch.<span class="cue">"Ball of foot."</span></div>
+    <div class="legend-item"><strong>Crank</strong> The arms that hold the pedals. They turn around in circles to drive the chain.<span class="cue">"Round and round."</span></div>
+    <div class="legend-item"><strong>Chain</strong> The metal links that connect the crank to the rear wheel. Don't touch with bare hands — chains get greasy.<span class="cue">"Greasy. Don't touch."</span></div>
+  </div>
+
+  <h3 style="margin: 2rem 0 0.7rem">Biking grows with you</h3>
+  <p style="color:var(--ink-soft); margin-bottom:1rem">Biking has stages. Each stage opens up new places to ride. There is no rush. Every rider started where you are.</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon" style="background:linear-gradient(135deg,#f5d547,#c9a91f);color:var(--navy-deep)">🟡</div>
+      <h3>Driveway Stage</h3>
+      <p class="summary"><strong>What you learn here:</strong> balance, starting, stopping, steering. The driveway is the perfect classroom. No traffic, no surprises.</p>
+      <span class="cue">"Master the basics."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:linear-gradient(135deg,#a0b385,#6e8053);color:var(--cream)">🛤️</div>
+      <h3>Path Stage</h3>
+      <p class="summary"><strong>What you learn here:</strong> riding on bike paths and quiet streets. Hand signals. Riding next to Daddy. Longer distances.</p>
+      <span class="cue">"Stay smart, stay seen."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:linear-gradient(135deg,#8B5A2B,#6B4520);color:var(--cream)">🌲</div>
+      <h3>Trail Stage</h3>
+      <p class="summary"><strong>What you learn here:</strong> riding on dirt, going over roots and rocks, climbing hills, descending. Your brain reads the trail one move ahead.</p>
+      <span class="cue">"Eyes ahead."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:linear-gradient(135deg,#4a90b8,#2c6a8d);color:var(--cream)">🏆</div>
+      <h3>Rider Stage</h3>
+      <p class="summary"><strong>What you learn here:</strong> longer rides, route planning, basic maintenance, riding with friends. By now your skills, your safety habits, and your spirit are all yours.</p>
+      <span class="cue">"My bike. My ride. Forever."</span>
+    </div>
+  </div>
+
+  <h3 style="margin:2rem 0 0.7rem">Watch &amp; learn</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🎬</div>
+      <h3>How to Ride a Bike (for kids)</h3>
+      <p class="summary">An intro to the basics: balance, starting, stopping.</p>
+      <a class="video-link" href="https://www.youtube.com/results?search_query=how+to+ride+a+bike+for+kids" target="_blank" rel="noopener">▶ Watch</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎬</div>
+      <h3>Bike Safety for Kids</h3>
+      <p class="summary">Helmet fit, hand signals, road rules — kid-friendly version.</p>
+      <a class="video-link" href="https://www.youtube.com/results?search_query=bike+safety+for+kids+rules+of+the+road" target="_blank" rel="noopener">▶ Watch</a>
+    </div>
+  </div>
+</section>
+
+<!-- RULES -->
+<section class="panel" id="rules">
+  <div class="section-intro">
+    Biking has clear rules — for safety AND for fun. Once you know them, every ride is better. These keep you safe on the driveway, the bike path, and the road.
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">⭐</div>
+      <h3>1. Helmet on, every ride</h3>
+      <p class="summary">No helmet = no riding. Two finger widths above the eyebrows, straps in a V around the ears, snug under the chin (one finger between strap and chin). Replace after any crash.</p>
+      <span class="cue">"Helmet first. Always."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🚦</div>
+      <h3>2. Ride WITH traffic</h3>
+      <p class="summary">On the road, ride in the SAME direction as cars. Stay as far right as is safe. Single file when riding with someone else.</p>
+      <span class="cue">"Same way as cars."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛑</div>
+      <h3>3. Stop at stop signs</h3>
+      <p class="summary">Bikes follow car rules. STOP at every stop sign. Look LEFT, then RIGHT, then LEFT AGAIN before crossing.</p>
+      <span class="cue">"Look both ways twice."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">✋</div>
+      <h3>4. Hand signals</h3>
+      <p class="summary"><strong>LEFT turn:</strong> stick left arm STRAIGHT out. <strong>RIGHT turn:</strong> left arm BENT up at the elbow (or right arm straight out). <strong>STOP:</strong> left arm bent DOWN at the elbow.</p>
+      <span class="cue">"Tell people what you're doing."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">👁️</div>
+      <h3>5. Look before you turn</h3>
+      <p class="summary">Always look OVER YOUR SHOULDER before changing direction. Then signal. Then turn. Look-signal-turn — that order.</p>
+      <span class="cue">"Look. Signal. Turn."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🪞</div>
+      <h3>6. Stay seen</h3>
+      <p class="summary">Wear bright colors (especially yellow). Use lights at night or in the rain. Make eye contact with drivers at intersections.</p>
+      <span class="cue">"Bright clothes. Eye contact."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🚸</div>
+      <h3>7. Sidewalks &amp; bike paths</h3>
+      <p class="summary">On the sidewalk: SLOW DOWN. Walkers always have right of way. Say "On your left!" before passing. On bike paths: same — slow down for walkers.</p>
+      <span class="cue">"Say 'on your left.'"</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤲</div>
+      <h3>8. Two hands on the bars</h3>
+      <p class="summary">No riding "no hands" until you're MUCH more experienced. Keep both hands on the handlebars, ready to brake.</p>
+      <span class="cue">"Two hands. Always."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛞</div>
+      <h3>9. Bike check before EVERY ride</h3>
+      <p class="summary"><strong>A-B-C check:</strong> <strong>A</strong>ir in the tires (squeeze them). <strong>B</strong>rakes work (squeeze the levers). <strong>C</strong>hain on (look down). Takes 30 seconds. Saves crashes.</p>
+      <span class="cue">"A. B. C. Then go."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <h3>10. Be a great rider</h3>
+      <p class="summary">Wave to other riders. Help if someone falls. Don't show off to make others feel small. Biking is more fun when everyone is welcome.</p>
+      <span class="cue">"Wave. Help. Be kind."</span>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    A bike is freedom on two wheels. The rules are not to slow you down — they're what let you ride further, faster, and for the rest of your life.
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="panel" id="skills">
+  <div class="section-intro">
+    Every move on a bike has a name and a feel. You already know how to balance. Now let's name the moves and learn the secrets.
+  </div>
+
+  <h3 style="margin-bottom:0.8rem">The 6 essential moves</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🚀</div>
+      <h3>Starting (the push-off)</h3>
+      <p class="summary">Pedal up to the 2 o'clock position. Foot ON the pedal. Push DOWN as you push off with the other foot. The down-push is what gets you going.</p>
+      <span class="cue">"Pedal at 2. Push down."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛑</div>
+      <h3>Stopping (smooth)</h3>
+      <p class="summary">Squeeze BOTH brake levers TOGETHER — equal pressure on each. Slide back on the seat. Foot down only AFTER you've stopped.</p>
+      <span class="cue">"Both brakes. Foot last."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">↩️</div>
+      <h3>Turning</h3>
+      <p class="summary">LOOK where you want to go (your body follows your eyes). Lean slightly into the turn. Smooth gentle steer — don't yank the bars.</p>
+      <span class="cue">"Look. Lean. Glide."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚖️</div>
+      <h3>Balancing slow</h3>
+      <p class="summary">Looking ahead helps balance more than looking down. The slower you go, the harder it gets. Keep some pedal pressure on at all times.</p>
+      <span class="cue">"Eyes up. Keep pedaling."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚙️</div>
+      <h3>Shifting gears</h3>
+      <p class="summary"><strong>LOW gear</strong> (easy) = for hills going UP. <strong>HIGH gear</strong> (hard) = for flat or downhill. Shift while pedaling. Don't shift while standing still.</p>
+      <span class="cue">"Up = low. Flat = high."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">✋</div>
+      <h3>Signaling</h3>
+      <p class="summary">Stick your arm out for left turn. Bent up for right turn. Bent down for stop. Practice in the driveway before you need them.</p>
+      <span class="cue">"Tell people first."</span>
+    </div>
+  </div>
+
+  <h3 style="margin:2rem 0 0.8rem">The Helmet Check (every ride)</h3>
+  <div class="card">
+    <p><strong>The 2-V-1 check:</strong></p>
+    <ul style="margin-left:1.2rem; margin-top:0.5rem">
+      <li><strong>2 fingers</strong> above your eyebrows — that's how high the front of the helmet sits.</li>
+      <li><strong>V shape</strong> — the straps come together to form a V right under your earlobes.</li>
+      <li><strong>1 finger</strong> between the chin strap and your chin — snug, but not choking.</li>
+    </ul>
+    <span class="cue">"2, V, 1. Every ride."</span>
+  </div>
+
+  <h3 style="margin:2rem 0 0.8rem">The Athletic Bike Position</h3>
+  <div class="card">
+    <p><strong>Before every ride, find this position:</strong></p>
+    <ul style="margin-left:1.2rem; margin-top:0.5rem">
+      <li>Pedals at 3 and 9 o'clock (level).</li>
+      <li>Knees slightly bent.</li>
+      <li>Elbows slightly bent (don't lock).</li>
+      <li>Eyes UP, looking 20+ feet ahead.</li>
+      <li>Butt slightly off the seat for bumps.</li>
+    </ul>
+    <span class="cue">"Knees soft. Eyes far."</span>
+  </div>
+
+  <h3 style="margin:2rem 0 0.8rem">The Five Steps of Every Stop</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">1️⃣</div>
+      <h3>See it coming</h3>
+      <p class="summary">Look ahead. If you might need to stop, START thinking about it now.</p>
+      <span class="cue">"Plan ahead."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">2️⃣</div>
+      <h3>Signal</h3>
+      <p class="summary">Stick your hand out (the STOP signal) so others know.</p>
+      <span class="cue">"Tell them."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">3️⃣</div>
+      <h3>Squeeze BOTH brakes</h3>
+      <p class="summary">Equal pressure on both levers. Front brake does most of the stopping; rear keeps you stable.</p>
+      <span class="cue">"Both together."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">4️⃣</div>
+      <h3>Shift weight back</h3>
+      <p class="summary">Slide your butt slightly back on the seat. This keeps the front wheel grounded.</p>
+      <span class="cue">"Weight back."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">5️⃣</div>
+      <h3>Foot down</h3>
+      <p class="summary">Only after the bike has STOPPED. Pick your stronger leg. Put that foot flat on the ground.</p>
+      <span class="cue">"Foot last."</span>
+    </div>
+  </div>
+</section>
+
+<!-- 52-WEEK PROGRAM -->
+<section class="panel" id="program">
+  <div class="section-intro">
+    The structure stays the same so Nicolas can predict what's coming. The content inside the structure changes so it never gets boring. Four lesson formats roll in over the year — one at a time, never all at once. Each format scales to a 60-min lesson with Coach or a 30-min practice with Daddy.
+  </div>
+
+  <h2 style="margin-bottom:0.4rem">Why formats, not single-skill weeks</h2>
+  <p style="color:var(--ink-soft); margin-bottom: 1.5rem; font-size:1.02rem">Nicolas needs predictable structure. He also needs novelty — but novelty inside the structure, not novelty AS the structure. So instead of "this week we do uppies, next week we do dribbles," every practice follows the same shape: warm up → play → new skill → play with skill → drill → clean up. The shape is the constant. What goes inside each block is what evolves.</p>
+  <p style="color:var(--ink-soft); margin-bottom: 1.5rem; font-size:1.02rem">Built-in transitions (water cooler, ball machine adjustments, lights on/off) are <strong>part of the practice</strong>, not interruptions. They reset attention between blocks. Plan for them.</p>
+
+  <h2 style="margin-top:2rem; margin-bottom:0.7rem">The Four Formats</h2>
+  <p style="color:var(--ink-soft);margin-bottom:1.2rem">One format starts. A second is added at week 7. A third at week 27. A fourth at week 40. After each addition, formats <em>rotate</em> — never converge.</p>
+
+  <!-- FORMAT A -->
+  <div class="format-card format-A">
+    <span class="format-tag tag-A">Format A · Discovery</span>
+    <h3>"Look at this. Let's try."</h3>
+    <span class="format-when">Weeks 1–6 (only format used) · Then in rotation through week 52</span>
+    <p>Foundation building. Lots of preview, lots of demo, lots of "let's see what this is." Skills are introduced gently and revisited often. Every concept Nicolas needs (court parts, grip, bounce-catch, balance, dribbles, uppies, ready position, drop-and-hit) lives inside this format — woven into the warm-up and the new-skill block instead of taking over the whole session.</p>
+
+    <div class="format-versions">
+      <div class="version-block">
+        <h4>With Coach <span class="duration">60 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">8 min</span><div><span class="blk-name">Warm Up</span><span class="blk-desc">Body wake-up + 2 moves from the warm-up menu (e.g., bounce-catch + dribbles).</span><span class="blk-cue">"Wake up the body."</span></div></li>
+          <li><span class="blk-time">8 min</span><div><span class="blk-name">Play</span><span class="blk-desc">Free play with ball/ball. No goal. No rules. Just fun.</span><span class="blk-cue">"Just play."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">New Skill Preview</span><span class="blk-desc">Watched the video at home? Looked at the picture? Now we name it, demo it, try it slowly.</span><span class="blk-cue">"Watch. Then try."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Play with the New Skill</span><span class="blk-desc">Put it into a game right away. Low-pressure application.</span><span class="blk-cue">"Now use it."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Drill</span><span class="blk-desc">Focused repetition. Coach feeds. Nicolas hits.</span><span class="blk-cue">"Reps build it."</span></div></li>
+          <li><span class="blk-time">8 min</span><div><span class="blk-name">Favorite Game</span><span class="blk-desc">End on a high. Nicolas picks from the games list.</span><span class="blk-cue">"End on a high."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Clean Up</span><span class="blk-desc">Pick up balls, water, exit ritual (handshake, "thank you").</span><span class="blk-cue">"Pack up. Water. Thank you."</span></div></li>
+        </ul>
+      </div>
+      <div class="version-block">
+        <h4>With Daddy <span class="duration">30 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Warm Up</span><span class="blk-desc">1 move from the menu.</span><span class="blk-cue">"Wake up the body."</span></div></li>
+          <li><span class="blk-time">6 min</span><div><span class="blk-name">Play</span><span class="blk-desc">Free play. Ball machine welcome.</span><span class="blk-cue">"Just play."</span></div></li>
+          <li><span class="blk-time">7 min</span><div><span class="blk-name">Skill</span><span class="blk-desc">Revisit or preview. Quick.</span><span class="blk-cue">"Watch. Then try."</span></div></li>
+          <li><span class="blk-time">7 min</span><div><span class="blk-name">Play with Skill</span><span class="blk-desc">Apply it in a game.</span><span class="blk-cue">"Now use it."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Clean Up</span><span class="blk-desc">Lights, water, gear. Same exit ritual.</span><span class="blk-cue">"Pack up. Water. Thank you."</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMAT B -->
+  <div class="format-card format-B">
+    <span class="format-tag tag-B">Format B · Rally</span>
+    <h3>"Back and forth. Keep it going."</h3>
+    <span class="format-when">Introduced Week 7 · Alternates with A through week 26</span>
+    <p>Once foundations land, the focus shifts to <em>riding skills</em>. Less new instruction, more applying what you know. Braking, turning, shifting, signaling. Nicolas gets to feel like a real rider — moving with purpose, the rhythm of the ride.</p>
+
+    <div class="format-versions">
+      <div class="version-block">
+        <h4>With Coach <span class="duration">60 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">8 min</span><div><span class="blk-name">Warm Up</span><span class="blk-desc">2 menu moves (faster reps now). Add shadow swings.</span><span class="blk-cue">"Wake up the body."</span></div></li>
+          <li><span class="blk-time">7 min</span><div><span class="blk-name">Rally Ready</span><span class="blk-desc">Mini bounce-and-hit rally to find the rhythm. No counting yet.</span><span class="blk-cue">"Find the rhythm."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Target Challenge</span><span class="blk-desc">Hoops, cones, or chalk zones on the other side. Hit the target = point.</span><span class="blk-cue">"Aim and hit."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Cooperative Rally</span><span class="blk-desc">Try to beat the team record. "Last week we got to 8. Today let's try 10."</span><span class="blk-cue">"Beat the record."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Mini-Game</span><span class="blk-desc">First to 5 points (or 7). Just for fun, not yet the full scoring system.</span><span class="blk-cue">"First to five."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Cool Down Play</span><span class="blk-desc">Silly low-stakes (Wall Ball, Sharks &amp; Minnows, Steal the Bacon).</span><span class="blk-cue">"Silly games."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Clean Up</span><span class="blk-desc">Same exit ritual as Format A.</span><span class="blk-cue">"Pack up. Water. Thank you."</span></div></li>
+        </ul>
+      </div>
+      <div class="version-block">
+        <h4>With Daddy <span class="duration">30 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Warm Up</span><span class="blk-desc">1–2 menu moves.</span><span class="blk-cue">"Wake up the body."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Target Practice</span><span class="blk-desc">2 cones or 1 hoop. Aim and hit.</span><span class="blk-cue">"Aim and hit."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Rally Challenge</span><span class="blk-desc">Beat the daily record together.</span><span class="blk-cue">"Beat the record."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Clean Up</span><span class="blk-desc">Lights, water, gear.</span><span class="blk-cue">"Pack up. Water. Thank you."</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMAT C -->
+  <div class="format-card format-C">
+    <span class="format-tag tag-C">Format C · Match</span>
+    <h3>"Real ride. Real road."</h3>
+    <span class="format-when">Introduced Week 27 · Rotates with A and B through week 39</span>
+    <p>Now real games enter the picture. The session feels more like a real match without losing the playful frame. Nicolas practices small-sided scrimmages, position play, and managing the regulation challenge of competition. Built-in "champion moments" guarantee a high note at the end.</p>
+
+    <div class="format-versions">
+      <div class="version-block">
+        <h4>With Coach <span class="duration">60 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">8 min</span><div><span class="blk-name">Warm Up</span><span class="blk-desc">Menu moves + add a few shadow serves and split steps.</span><span class="blk-cue">"Wake up the body."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Shadow Preview</span><span class="blk-desc">No ball. Walk through "today we're playing first-to-7." Practice calling the score out loud.</span><span class="blk-cue">"Walk it. No ball."</span></div></li>
+          <li><span class="blk-time">12 min</span><div><span class="blk-name">Point Practice</span><span class="blk-desc">Single points, no full games. Coach feeds first ball. Play it out.</span><span class="blk-cue">"One point at a time."</span></div></li>
+          <li><span class="blk-time">15 min</span><div><span class="blk-name">Mini Match</span><span class="blk-desc">First to 4 or 7 points, with score-calling. Take a water break between games.</span><span class="blk-cue">"Real score."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Champion Moment</span><span class="blk-desc">A favorite drill or game from earlier. Always end on a win-feeling.</span><span class="blk-cue">"End on a win."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Cool Down</span><span class="blk-desc">Two laps, light stretches, water.</span><span class="blk-cue">"Lap. Stretch. Water."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Clean Up</span><span class="blk-desc">Same exit ritual.</span><span class="blk-cue">"Pack up. Water. Thank you."</span></div></li>
+        </ul>
+      </div>
+      <div class="version-block">
+        <h4>With Daddy <span class="duration">30 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Warm Up</span><span class="blk-desc">1–2 menu moves.</span><span class="blk-cue">"Wake up the body."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Point Practice</span><span class="blk-desc">Single points. Call the score together.</span><span class="blk-cue">"One point at a time."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Mini Game</span><span class="blk-desc">First to 5. Fast, fun.</span><span class="blk-cue">"Real score."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Clean Up</span><span class="blk-desc">Lights, water, gear.</span><span class="blk-cue">"Pack up. Water. Thank you."</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMAT D -->
+  <div class="format-card format-D">
+    <span class="format-tag tag-D">Format D · Athlete</span>
+    <h3>"I am a rider. This is my ride."</h3>
+    <span class="format-when">Introduced Week 40 · Rotates with A, B, and C through week 52</span>
+    <p>Ownership and reflection. Nicolas chooses his warm-up moves from the menu. He picks one stroke he wants to refine. He plays a tactical game (hit deep, come to net, etc.). And at the end, he watches a short clip or names one win and one challenge — the metacognitive frame that real athletes build.</p>
+
+    <div class="format-versions">
+      <div class="version-block">
+        <h4>With Coach <span class="duration">60 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">8 min</span><div><span class="blk-name">Warm Up — Your Choice</span><span class="blk-desc">Nicolas picks 2 moves from the menu. He calls them out.</span><span class="blk-cue">"I pick today."</span></div></li>
+          <li><span class="blk-time">12 min</span><div><span class="blk-name">Technical Tune-Up</span><span class="blk-desc">"What do you want to work on today?" Forehand? Serve? Volley? He chooses.</span><span class="blk-cue">"Make my best better."</span></div></li>
+          <li><span class="blk-time">12 min</span><div><span class="blk-name">Tactical Challenge</span><span class="blk-desc">A game with one specific tactic — "every shot has to land deep" or "sneak to the net."</span><span class="blk-cue">"One rule. One game."</span></div></li>
+          <li><span class="blk-time">15 min</span><div><span class="blk-name">Match Play</span><span class="blk-desc">Real ride to a destination. Real signals, real road awareness.</span><span class="blk-cue">"Play it real."</span></div></li>
+          <li><span class="blk-time">8 min</span><div><span class="blk-name">Reflect</span><span class="blk-desc">Watch a 30-second clip Coach filmed. Name one win. Name one challenge for next time.</span><span class="blk-cue">"What did I learn?"</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Clean Up</span><span class="blk-desc">Same exit ritual.</span><span class="blk-cue">"Pack up. Water. Thank you."</span></div></li>
+        </ul>
+      </div>
+      <div class="version-block">
+        <h4>With Daddy <span class="duration">30 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Warm Up — Choice</span><span class="blk-desc">Nicolas picks his moves.</span><span class="blk-cue">"I pick today."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Tune-Up</span><span class="blk-desc">One stroke he wants to work on.</span><span class="blk-cue">"Make my best better."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Match Play</span><span class="blk-desc">Quick game, real scoring.</span><span class="blk-cue">"Play it real."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Reflect + Clean Up</span><span class="blk-desc">"What was your favorite shot today?"</span><span class="blk-cue">"What did I learn?"</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- WARM UP MENU -->
+  <h2 style="margin-top:2.5rem; margin-bottom:0.6rem">The Warm-Up Menu</h2>
+  <p style="color:var(--ink-soft); margin-bottom:1.2rem">These are the foundation moves from the original "weeks 1–6." They never go away. They live in the warm-up of every format, every session — picking 1–3 each time, rotating through. New foundation moves get added; old ones fade and return.</p>
+
+  <div class="warmup-grid">
+    <div class="warmup-item"><h4>⭐ Helmet Check</h4><p>2 fingers above eyebrows. V shape at ears. 1 finger under the chin. Every ride.</p><span class="cue">"2, V, 1."</span></div>
+    <div class="warmup-item"><h4>🛞 ABC Bike Check</h4><p>Air in tires. Brakes work. Chain on. 30 seconds, then ride.</p><span class="cue">"A. B. C."</span></div>
+    <div class="warmup-item"><h4>🤸 Body Wake-Up</h4><p>Arm circles, leg swings, hip openers, ankle circles. 30 seconds each.</p><span class="cue">"Wake the body."</span></div>
+    <div class="warmup-item"><h4>8️⃣ Figure-8s</h4><p>Two cones 10 feet apart. Ride a figure-8 around them. Slow first, then faster. Builds steering and balance.</p><span class="cue">"Look where you go."</span></div>
+    <div class="warmup-item"><h4>🐢 Slow Race</h4><p>LAST to finish wins. Stay upright while going as slowly as possible. Builds balance.</p><span class="cue">"Slower is harder."</span></div>
+    <div class="warmup-item"><h4>🦵 One-Foot Pedal</h4><p>Pedal in a straight line using only ONE foot for 10 seconds. Switch. Builds smooth pedal strokes.</p><span class="cue">"Smooth circles."</span></div>
+    <div class="warmup-item"><h4>👀 Shoulder Check</h4><p>Ride straight forward. Look BACK over your left shoulder. Then your right. Stay straight while you look.</p><span class="cue">"Look. Stay straight."</span></div>
+    <div class="warmup-item"><h4>✋ Signal Practice</h4><p>Ride with one hand on the bars. Stick out the other arm — left turn signal. Hold for 5 seconds. Switch hands.</p><span class="cue">"One hand. Steady."</span></div>
+    <div class="warmup-item"><h4>🛑 Controlled Stops</h4><p>Ride toward a cone. STOP with the front wheel right at the cone. Use both brakes. Foot down ONLY when stopped.</p><span class="cue">"Both brakes. Foot last."</span></div>
+    <div class="warmup-item"><h4>🚧 Cone Slalom</h4><p>5 cones in a line, 4 feet apart. Weave through them. Smooth turns. Don't hit the cones.</p><span class="cue">"Smooth and slow."</span></div>
+  </div>
+
+  <!-- THE ROTATION CALENDAR -->
+  <h2 style="margin-top:2.5rem; margin-bottom:0.6rem">The 52-Week Rotation</h2>
+  <p style="color:var(--ink-soft); margin-bottom:1.2rem">Each week shows the format used and the new content focus inside it. Skills can rotate, fade, return, or be skipped. Life happens — there is no falling behind.</p>
+
+  <!-- PHASE 1 -->
+  <div class="phase">
+    <h3>Phase 1 · Discover the Bike</h3>
+    <div class="phase-meta">
+      <span class="phase-chip">Weeks 1–6</span>
+      <span class="phase-chip">Format A only</span>
+      <span class="phase-chip">Same shape every time</span>
+    </div>
+    <p>Six weeks of the exact same lesson shape. Every block in the same order. The content inside the warm-up and the new-skill block rotates through the foundation moves so Nicolas gets familiar with all of them — but the structure never moves. This is when the format becomes <em>predictable</em>. After six weeks, he knows it.</p>
+  </div>
+  <div class="week-row">
+    <div class="week-card fmt-A"><span class="wk-num">Week 1<span class="fmt-pill A">A</span></span><h4>Discover the Bike</h4><p><em>Warm-up:</em> body wake-up + helmet check. <em>New skill:</em> name every part of the bike. <em>Play:</em> "name that part" game with Daddy.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 2<span class="fmt-pill A">A</span></span><h4>The Helmet &amp; Fit</h4><p><em>Warm-up:</em> helmet check. <em>New skill:</em> the 2-V-1 helmet fit check. Also: bike fit (seat height — leg almost straight at the bottom pedal).</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 3<span class="fmt-pill A">A</span></span><h4>Discover Balance</h4><p><em>Warm-up:</em> body wake-up. <em>New skill:</em> coasting in a straight line (no pedaling). Eyes up, soft knees. 20 feet without putting a foot down.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 4<span class="fmt-pill A">A</span></span><h4>Discover Starting</h4><p><em>Warm-up:</em> helmet + ABC check. <em>New skill:</em> the push-off — pedal at 2 o'clock, foot ON, push DOWN. Smooth start.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 5<span class="fmt-pill A">A</span></span><h4>Discover Stopping</h4><p><em>Warm-up:</em> ABC check. <em>New skill:</em> both brakes together. Foot down ONLY when stopped. Practice stopping at a cone.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 6<span class="fmt-pill A">A</span></span><h4>Discover Steering</h4><p><em>Warm-up:</em> figure-8s. <em>New skill:</em> look where you want to go. Smooth turns, no yanking the bars.</p></div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase">
+    <h3>Phase 2 · Adding Riding Skills</h3>
+    <div class="phase-meta">
+      <span class="phase-chip">Weeks 7–26</span>
+      <span class="phase-chip">A &amp; B alternating</span>
+      <span class="phase-chip">First format change</span>
+    </div>
+    <p>Format B joins. The two formats alternate every other week — A, then B, then A, then B. Format A keeps introducing new technical pieces (routes, throws, catches); Format B applies them in cooperative drills. Watch for Nicolas noticing the new format. Talk about it. Use the visual schedule to preview the difference.</p>
+  </div>
+  <div class="week-row">
+    <div class="week-card fmt-A"><span class="wk-num">Week 7<span class="fmt-pill A">A</span></span><h4>Braking Technique</h4><p>New skill: front brake does most of the stopping. Rear keeps you stable. Squeeze BOTH evenly.</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 8<span class="fmt-pill B">B</span></span><h4>Braking Drill</h4><p>Ride at speed. Daddy yells "STOP!" Brake smoothly. Mark where the front wheel lands.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 9<span class="fmt-pill A">A</span></span><h4>Turning Sharp</h4><p>New skill: lean into the turn. The bike follows the body. Don't yank the bars.</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 10<span class="fmt-pill B">B</span></span><h4>Cone Slalom Race</h4><p>Weave through 5 cones, then back. Daddy times it. Beat the record.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 11<span class="fmt-pill A">A</span></span><h4>Shoulder Check</h4><p>New skill: look back over your shoulder without swerving. Build to looking both directions.</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 12<span class="fmt-pill B">B</span></span><h4>Look-and-Hold</h4><p>Ride straight. Daddy holds up fingers behind you. Look back, call out the number, keep going straight.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 13<span class="fmt-pill A">A</span></span><h4>Hand Signals</h4><p>New skill: left turn (arm out), right turn (arm bent up), stop (arm bent down). Practice each.</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 14<span class="fmt-pill B">B</span></span><h4>Signal &amp; Turn</h4><p>Ride toward an intersection (or driveway). Look. Signal. Turn. In that order.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 15<span class="fmt-pill A">A</span></span><h4>Shifting Gears</h4><p>New skill: shift to a LOW gear (easier) before a hill goes up. HIGH gear for flat/downhill.</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 16<span class="fmt-pill B">B</span></span><h4>Gear Practice</h4><p>Ride a flat section. Practice shifting up. Practice shifting down. Don't shift while standing still.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 17<span class="fmt-pill A">A</span></span><h4>Standing Pedal</h4><p>New skill: lift your butt off the seat and pedal STANDING for power on hills.</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 18<span class="fmt-pill B">B</span></span><h4>Stand Up Sprint</h4><p>Stand up, pedal hard, accelerate. Sit back down to cruise.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 19<span class="fmt-pill A">A</span></span><h4>Smooth Pedal Strokes</h4><p>New skill: think of pedaling as drawing circles. Push DOWN at 2 o'clock. Pull THROUGH at the bottom. Up at 8 o'clock.</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 20<span class="fmt-pill B">B</span></span><h4>One-Foot Drill</h4><p>Pedal with one foot only, 10 seconds. Switch. Builds the smooth circle.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 21<span class="fmt-pill A">A</span></span><h4>Riding Slow</h4><p>New skill: balance at a crawl. Lots of pedal pressure, eyes UP, light hands.</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 22<span class="fmt-pill B">B</span></span><h4>Slow Race</h4><p>LAST one to finish wins. Stay on the bike. Don't put a foot down.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 23<span class="fmt-pill A">A</span></span><h4>Hill Climbing</h4><p>New skill: low gear, steady pedaling, eyes up at the top of the hill, not at the ground.</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 24<span class="fmt-pill B">B</span></span><h4>Pick a Hill</h4><p>Find a small hill. Climb it. Coast back. Climb again. Build endurance.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 25<span class="fmt-pill A">A</span></span><h4>Descending Control</h4><p>New skill: feather the brakes (squeeze and release) going down hills. Don't lock them up.</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 26<span class="fmt-pill B">B</span></span><h4>Path Day</h4><p>End-of-phase celebration. Ride the Mattapoisett Bike Path with Daddy. Full ride, water break, treat.</p></div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase">
+    <h3>Phase 3 · Adding Match Play</h3>
+    <div class="phase-meta">
+      <span class="phase-chip">Weeks 27–39</span>
+      <span class="phase-chip">A, B &amp; C rotating</span>
+      <span class="phase-chip">Real scoring arrives</span>
+    </div>
+    <p>Format C enters. Now three formats rotate (A → B → C → A → B → C…). Format C is where real small-sided games happen. Format A keeps introducing new skills (reading defenses, stiff-arms, play calling). Format B keeps the cooperative drill muscle. Format C is where Nicolas practices the regulation challenge of competitive games with built-in safety: champion moments, water breaks, predictable structure.</p>
+  </div>
+  <div class="week-row">
+    <div class="week-card fmt-C"><span class="wk-num">Week 27<span class="fmt-pill C">C</span></span><h4>First Neighborhood Ride</h4><p>Format C debuts. Ride to a near landmark with Daddy. Practice hand signals at every turn.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 28<span class="fmt-pill A">A</span></span><h4>Reading the Road</h4><p>New skill: scan ahead 20+ feet. Spot potholes, cars, walkers BEFORE you reach them.</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 29<span class="fmt-pill B">B</span></span><h4>Scan &amp; Call</h4><p>While riding, call out things you see: "pothole left!", "walker ahead!". Builds awareness.</p></div>
+    <div class="week-card fmt-C"><span class="wk-num">Week 30<span class="fmt-pill C">C</span></span><h4>Intersection Practice</h4><p>Find a quiet intersection. Practice: slow down, look LEFT-RIGHT-LEFT, signal, cross.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 31<span class="fmt-pill A">A</span></span><h4>Riding in Formation</h4><p>New skill: single file behind Daddy. Stay 5 feet back. Match his speed.</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 32<span class="fmt-pill B">B</span></span><h4>Follow the Leader</h4><p>Daddy leads. You follow. He calls signals; you echo them.</p></div>
+    <div class="week-card fmt-C"><span class="wk-num">Week 33<span class="fmt-pill C">C</span></span><h4>Bike to a Destination</h4><p>Ride to an actual place — the library, the harbor, a friend's house. Real outing, not a loop.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 34<span class="fmt-pill A">A</span></span><h4>Riding on Trails</h4><p>New skill: dirt is different. Lighter grip. Stay relaxed. Eyes up the trail.</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 35<span class="fmt-pill B">B</span></span><h4>First Trail Ride</h4><p>Find a flat dirt trail. Ride for 15 minutes. Stop and look around.</p></div>
+    <div class="week-card fmt-C"><span class="wk-num">Week 36<span class="fmt-pill C">C</span></span><h4>Longer Ride</h4><p>Bigger route. 5–7 miles. Water break in the middle. Snack at the end.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 37<span class="fmt-pill A">A</span></span><h4>Riding in Light Rain</h4><p>New skill: brakes work LESS in the wet. Brake EARLIER. Slow down on turns. Bright clothes.</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 38<span class="fmt-pill B">B</span></span><h4>Drizzle Ride</h4><p>Pick a light-drizzle day. Short ride. Practice the slower braking and turning.</p></div>
+    <div class="week-card fmt-C"><span class="wk-num">Week 39<span class="fmt-pill C">C</span></span><h4>Cape Canal Bikeway</h4><p>End-of-phase celebration. Ride the Cape Cod Canal Bikeway with Daddy. 1–2 hours. Big-kid ride.</p></div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase">
+    <h3>Phase 4 · Becoming a Rider</h3>
+    <div class="phase-meta">
+      <span class="phase-chip">Weeks 40–52</span>
+      <span class="phase-chip">A, B, C &amp; D rotating</span>
+      <span class="phase-chip">Ownership emerges</span>
+    </div>
+    <p>Format D enters. All four rotate (A → B → C → D → A → B → C → D…). Format D is where Nicolas becomes the author. He picks his warm-up. He picks the skill to refine. He reflects at the end. The other formats keep doing what they do — but now there's a session every fourth week where he's running the show.</p>
+  </div>
+  <div class="week-row">
+    <div class="week-card fmt-D"><span class="wk-num">Week 40<span class="fmt-pill D">D</span></span><h4>I Plan My Ride</h4><p>Format D debuts. Nicolas picks the route. Looks at a map. Plans water stops.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 41<span class="fmt-pill A">A</span></span><h4>Basic Maintenance</h4><p>New skill: how to pump up a tire. How to read tire pressure (PSI on the side of the tire).</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 42<span class="fmt-pill B">B</span></span><h4>Pump &amp; Pre-Ride</h4><p>Pump both tires to the right PSI before every ride. Then go.</p></div>
+    <div class="week-card fmt-C"><span class="wk-num">Week 43<span class="fmt-pill C">C</span></span><h4>Multi-Stop Ride</h4><p>Plan a ride with 2 stops (post office, ice cream, etc.). Lock the bike at each.</p></div>
+    <div class="week-card fmt-D"><span class="wk-num">Week 44<span class="fmt-pill D">D</span></span><h4>I Lead the Ride</h4><p>Tactic: Nicolas leads, Daddy follows. Calls the signals.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 45<span class="fmt-pill A">A</span></span><h4>Fixing a Flat</h4><p>New skill: how to spot a flat. (For now, just identify it — actual fixing comes later.)</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 46<span class="fmt-pill B">B</span></span><h4>Pre-Ride Inspection</h4><p>Look at the chain. Spin the wheels. Check tires for cuts. Brakes squeeze fully? Then go.</p></div>
+    <div class="week-card fmt-C"><span class="wk-num">Week 47<span class="fmt-pill C">C</span></span><h4>Longer Ride with Friends</h4><p>Invite a cousin or neighbor. Group ride. Hand signals matter more with a group.</p></div>
+    <div class="week-card fmt-D"><span class="wk-num">Week 48<span class="fmt-pill D">D</span></span><h4>Riding Etiquette</h4><p>Tactic: practice "On your left!" while passing walkers. Wave to other riders.</p></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 49<span class="fmt-pill A">A</span></span><h4>Bike Camping Concepts</h4><p>New idea: how a bike could carry stuff. Panniers. Rear racks. The concept of a long ride with gear.</p></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 50<span class="fmt-pill B">B</span></span><h4>Loaded Bike Drill</h4><p>Strap a small backpack of weight to the back rack. Ride with it. Notice how it feels different.</p></div>
+    <div class="week-card fmt-C"><span class="wk-num">Week 51<span class="fmt-pill C">C</span></span><h4>Big Ride</h4><p>Best of the year — a longer ride to a destination. Bring snacks. Take pictures.</p></div>
+    <div class="week-card fmt-D"><span class="wk-num">Week 52<span class="fmt-pill D">D</span></span><h4>Biking Birthday</h4><p>Year-end. Reflect: 3 favorite rides. Set a goal for Year 2. Celebrate.</p></div>
+  </div>
+
+  <div class="pull-quote">
+    The format is the frame. The content is the painting. The frame stays steady so the painting can be bold.
+  </div>
+</section>
+
+<!-- GAMES -->
+<section class="panel" id="games">
+  <div class="section-intro">
+    Drills get the body strong. Games get the spirit strong. Mix them in every practice. Some are perfect for the driveway. Others work better at a park or path. Some are great when Alexander joins.
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="border-color: var(--alert-red); background: linear-gradient(135deg, #fef7e6, var(--cream-deep));">
+      <div class="card-icon" style="background: linear-gradient(135deg, #f5d547, #c9a91f)">🐢</div>
+      <h3>Slow Race <span style="font-size:0.75rem; background:var(--alert-red-deep); color:var(--cream); padding:0.15rem 0.5rem; border-radius:999px; font-weight:700; vertical-align:middle; margin-left:0.4rem">CLASSIC</span></h3>
+      <p class="summary">The backyard bike classic. Two players line up. Both start at the same time. <strong>LAST</strong> one to cross the finish line wins. You have to stay ON the bike — feet off the ground. Builds balance, control, and patience.</p>
+      <p style="font-size:0.88rem; color:var(--ink-soft); margin-top:0.6rem"><strong>Why it's perfect for the brothers:</strong> no speed pressure, built-in regulation breaks, the slower kid wins (great equalizer for different ages), and Alexander and Nicolas can both win on different days.</p>
+      <span class="cue">"Slower is harder."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🚧</div>
+      <h3>Obstacle Course</h3>
+      <p class="summary">Set up cones, sticks, chalk lines. Weave, jump curbs (small ones), ride over a board, stop at a line. Time it.</p>
+      <span class="cue">"Smooth. Don't stop."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">8️⃣</div>
+      <h3>Figure-8 Race</h3>
+      <p class="summary">Two cones 15 feet apart. Make a figure-8 between them. 3 laps = winner. Builds tight turns.</p>
+      <span class="cue">"Lean in. Look out."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">👣</div>
+      <h3>Foot Down Race</h3>
+      <p class="summary">Ride in a chalk-drawn circle. Put a foot down = OUT. Last rider in the circle wins.</p>
+      <span class="cue">"No foot down."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3>Sprint Race</h3>
+      <p class="summary">Mark a start and finish 50 yards apart. FASTEST to finish wins. (Counterpart to the slow race.)</p>
+      <span class="cue">"Stand up. Pedal hard."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">⛰️</div>
+      <h3>Hill Repeats</h3>
+      <p class="summary">Find a hill. Ride UP. Coast DOWN. Repeat 3 times. Builds power.</p>
+      <span class="cue">"Easy gear. Steady pedal."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">⏱️</div>
+      <h3>Time Trial</h3>
+      <p class="summary">Pick a loop (driveway lap, around the block). Time it. Try to beat the time next week.</p>
+      <span class="cue">"Beat last week's time."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🚂</div>
+      <h3>Follow the Leader</h3>
+      <p class="summary">Daddy leads. Nicolas follows EXACTLY — same line, same speed, same hand signals. Then switch.</p>
+      <span class="cue">"Match the leader."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🦵</div>
+      <h3>Track Stand</h3>
+      <p class="summary">Can you balance the bike at a STAND STILL? No foot down. How many seconds? Hard but cool.</p>
+      <span class="cue">"Still + balanced."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🪜</div>
+      <h3>Bike Limbo</h3>
+      <p class="summary">Two cones with a string between them at handlebar height. Ride under it. Lower the string each round.</p>
+      <span class="cue">"Duck low."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔍</div>
+      <h3>Bike Scavenger Hunt</h3>
+      <p class="summary">Daddy makes a list ("red mailbox, blue door, biggest tree on the street"). Ride around, find them all. Time it.</p>
+      <span class="cue">"Eyes up. Find them."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏆</div>
+      <h3>BMX Tricks (when ready)</h3>
+      <p class="summary">Manuals (front wheel up briefly). Bunny hops (both wheels off the ground). LEARN ON GRASS first. Wear all the gear.</p>
+      <span class="cue">"Grass first. Gear always."</span>
+    </div>
+  </div>
+
+  <h3 style="margin: 2rem 0 0.7rem">Watch fun bike games in action</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🎬</div>
+      <h3>Bike Games for Kids</h3>
+      <p class="summary">Fun games to play on bikes with friends and family.</p>
+      <a class="video-link" href="https://www.youtube.com/results?search_query=bike+games+for+kids+backyard" target="_blank" rel="noopener">▶ Watch</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎬</div>
+      <h3>Bike Skills Course</h3>
+      <p class="summary">Setting up a backyard skills course for kids.</p>
+      <a class="video-link" href="https://www.youtube.com/results?search_query=kids+bike+skills+course+backyard" target="_blank" rel="noopener">▶ Watch</a>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.5rem; background:var(--cream-deep)">
+    <h3>Make any drill more fun</h3>
+    <ul style="margin-left:1.2rem; margin-top:0.5rem">
+      <li><strong>Add a story.</strong> "You're a Tour de France rider. The peloton is right behind you."</li>
+      <li><strong>Add silly cues.</strong> "Pedal like there's lava on the ground."</li>
+      <li><strong>Add a target.</strong> A cone, a chalk square. Aim is more fun than just riding around.</li>
+      <li><strong>Add a count.</strong> "How many figure-8s in 60 seconds?" Counting builds rhythm.</li>
+      <li><strong>Add a victory move.</strong> Hands up at the finish line. Yell "VICTORY!"</li>
+      <li><strong>Add music.</strong> Bring a small speaker on a longer ride. Pedal to the beat.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SOCIAL STORY -->
+<section class="panel" id="story">
+  <div class="section-intro">
+    A picture story about a biking day. Read it with Mom or Dad before you ride. Read it again whenever you want. The pictures show what to expect. The words show what to do.
+  </div>
+
+  <div class="story-book">
+    <div style="text-align:center; margin-bottom:1.5rem">
+      <h2 style="color:var(--alert-red-deep)">Nicolas Goes for a Ride</h2>
+      <p style="font-style:italic; color:var(--ink-soft)">A story about my lesson</p>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🎾</div>
+      <div class="text"><span class="story-num">PAGE 1</span>My name is Nicolas. I am a biker.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">📅</div>
+      <div class="text"><span class="story-num">PAGE 2</span>Today I am going for a bike ride. I will ride with Daddy.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🎒</div>
+      <div class="text"><span class="story-num">PAGE 3</span>I pack my bag. Racquet. Water bottle. Snack. I am ready.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🚗</div>
+      <div class="text"><span class="story-num">PAGE 4</span>I put on my helmet. Daddy checks the straps.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">👋</div>
+      <div class="text"><span class="story-num">PAGE 5</span>I see Coach. He says "Hi Nicolas!" I can say hi back, or wave, or smile.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🤸</div>
+      <div class="text"><span class="story-num">PAGE 6</span>First we warm up. We jog. We stretch. My body wakes up.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🏃</div>
+      <div class="text"><span class="story-num">PAGE 7</span>Then we do drills. Coach feeds me balls. I hit them.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">💪</div>
+      <div class="text"><span class="story-num">PAGE 8</span>Sometimes I hit it great. I feel proud.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🤔</div>
+      <div class="text"><span class="story-num">PAGE 9</span>Sometimes I miss. That is OK. Even pros miss balls. Missing means I am learning.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">😮‍💨</div>
+      <div class="text"><span class="story-num">PAGE 10</span>If I feel frustrated, I can take a deep breath. I can ask for a water break. That is allowed.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🎯</div>
+      <div class="text"><span class="story-num">PAGE 11</span>Coach helps me. He gives me a tip. I try again.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🎮</div>
+      <div class="text"><span class="story-num">PAGE 12</span>At the end, we play a fun game. I love this part.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🤝</div>
+      <div class="text"><span class="story-num">PAGE 13</span>When the lesson is done, I shake Coach's hand. I say "Thank you Coach!"</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">⭐</div>
+      <div class="text"><span class="story-num">PAGE 14</span>I tell Mom or Dad one thing I liked. One thing I learned. One thing that was hard.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🌟</div>
+      <div class="text"><span class="story-num">PAGE 15</span>Biking makes me strong. Biking makes me brave. Biking makes me happy. I am a biker.</div>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    Falling is part of biking. You get back up. Brush off. Try again.. Learning is part of the game. Showing up is part of the game. You belong on the field.
+  </div>
+</section>
+
+<!-- SOCCER SONGS -->
+<section class="panel" id="songs">
+  <div class="section-intro">
+    Music is part of the ride. Songs help Nicolas preview what's coming, regulate his body between rides, and celebrate the joy of a great day on the bike. Tap to play. Add new ones any time.
+  </div>
+<div class="user-songs-section">
+  <button class="add-song-btn" id="add-song-btn" type="button">+ Add a Suno Song</button>
+  <div id="user-songs-list"></div>
+</div>
+
+
+  <h2 style="margin-bottom:0.4rem">Nicolas's Biking Playlist</h2>
+  <p style="color:var(--ink-soft); margin-bottom:1.5rem">Tap any song to listen. Use them before practice, between blocks, or after a great game.</p>
+
+  <div class="card-grid">
+    <div class="card song-add">
+      <div class="card-icon" style="background:linear-gradient(135deg, var(--cream), var(--cream-deep)) !important; color:var(--sky-deep); border:2px dashed var(--sky);">🎵</div>
+      <h3>Make Your First Biking Song</h3>
+      <p class="summary" style="text-align:left">Same workflow as the tennis songs. Some ideas:</p>
+      <ol>
+        <li>"Helmet On" — a rhythm song for the pre-ride routine.</li>
+        <li>"Eyes Up, Eyes Far" — a song about looking ahead, not down.</li>
+        <li>"Two Hands, Two Brakes" — a safety song with a beat.</li>
+        <li>"Backyard Biker" — a song for the driveway practice.</li>
+        <li>"Down the Canal" — a song for the longer rides on the Cape Cod Canal Bikeway.</li>
+      </ol>
+    </div>
+    <div class="card song-add">
+      <div class="card-icon" style="background:linear-gradient(135deg, var(--cream), var(--cream-deep)) !important; color:var(--sky-deep); border:2px dashed var(--sky);">➕</div>
+      <h3>How to Add a New Song</h3>
+      <p class="summary" style="text-align:left">Tap the green <strong>+ Add a Suno Song</strong> button at the top of this panel. The app will save your songs right on this iPad — they'll be there next time too.</p>
+      <ol>
+        <li>Make the song on Suno together with Nicolas/Alexander.</li>
+        <li>Copy the share link from Suno (the URL of the song page).</li>
+        <li>Tap <strong>+ Add a Suno Song</strong> above.</li>
+        <li>Enter the title, paste the URL, tap Save.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h3 style="margin: 2rem 0 0.7rem">When to use the songs</h3>
+  <div class="song-uses">
+    <div class="song-use">
+      <h4>🎒 On the way to practice</h4>
+      <p>In the car. Builds anticipation. Lets the body get into "ride mode" before a ride.</p>
+    </div>
+    <div class="song-use">
+      <h4>🤸 Warm-up block</h4>
+      <p>Play a song while doing menu moves. The song's length signals when warm-up is done.</p>
+    </div>
+    <div class="song-use">
+      <h4>💧 Between blocks</h4>
+      <p>A 30-second song clip resets attention before moving to the next part of the lesson.</p>
+    </div>
+    <div class="song-use">
+      <h4>🏆 Champion moment</h4>
+      <p>End every Format C lesson with a song. Pair the song with the win-feeling.</p>
+    </div>
+    <div class="song-use">
+      <h4>😮‍💨 Regulation</h4>
+      <p>If a moment feels hard, pause and listen to a familiar song. Then come back to the field.</p>
+    </div>
+    <div class="song-use">
+      <h4>🚗 Drive home</h4>
+      <p>Replay the song on the way home. Pairs the music with the memory of a good game.</p>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    A song is a feeling you can put in your pocket. Biking plus music plus rhythm plus joy — that is your ride.
+  </div>
+
+  <p style="text-align:center; margin-top:2rem; font-family:'Fraunces',serif; font-style:italic; color:var(--ink-soft)">— Built with love for Nicolas —</p>
+</section>
+
+
+
+<div class="song-modal-overlay" id="song-modal" hidden>
+  <div class="song-modal-box" role="dialog" aria-modal="true" aria-labelledby="song-modal-title">
+    <h3 id="song-modal-title">Add a Suno Song</h3>
+    <label class="song-modal-label" for="song-title-input">Song Title</label>
+    <input type="text" id="song-title-input" placeholder="e.g. Hype Song" autocomplete="off">
+    <label class="song-modal-label" for="song-url-input">Suno URL</label>
+    <input type="url" id="song-url-input" placeholder="https://suno.com/s/...">
+    <p class="song-modal-hint">Paste the share link from Suno (the URL of the song page).</p>
+    <div class="song-modal-actions">
+      <button class="song-modal-btn cancel" id="song-modal-cancel" type="button">Cancel</button>
+      <button class="song-modal-btn save"   id="song-modal-save"   type="button">Save</button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- IN-APP VIDEO PLAYER OVERLAY -->
+<div id="video-overlay" role="dialog" aria-label="Video player">
+  <div id="video-overlay-bar">
+    <button id="video-overlay-back" type="button" aria-label="Go back to the playbook">
+      <span aria-hidden="true">←</span> Back to Playbook
+    </button>
+    <div id="video-overlay-title"></div>
+    <div style="width: 1px"></div>
+  </div>
+  <div id="video-overlay-frame-wrap">
+    <iframe id="video-overlay-frame" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </div>
+</div>
+
+<!-- PWA INSTALL HINT (shows once, only on iPad/iPhone Safari, not in installed PWA) -->
+<div id="install-hint" style="display:none; position:fixed; bottom:1rem; left:1rem; right:1rem; background:var(--sky-deep); color:var(--cream); padding:1rem 1.25rem; border-radius:14px; box-shadow:0 8px 24px rgba(0,0,0,0.25); z-index:9999; font-size:0.95rem; max-width:520px; margin:0 auto;">
+  <div style="display:flex; align-items:flex-start; gap:0.75rem;">
+    <div style="flex:1;">
+      <strong style="font-family:'Fraunces',serif; font-size:1.1rem;">Install Nicolas's Biking</strong>
+      <p style="margin:0.4rem 0 0; line-height:1.4;">Tap <span style="display:inline-block; padding:0.1rem 0.4rem; background:rgba(255,255,255,0.18); border-radius:5px;">Share <span aria-hidden="true">⬆️</span></span> then <strong>"Add to Home Screen"</strong> for the full app experience.</p>
+    </div>
+    <button onclick="document.getElementById('install-hint').style.display='none'; localStorage.setItem('hideInstallHint','1')" style="background:transparent; color:var(--cream); border:1px solid rgba(255,255,255,0.4); border-radius:8px; padding:0.4rem 0.8rem; cursor:pointer; font-size:0.85rem; font-weight:600;">Got it</button>
+  </div>
+</div>
+
+<script>
+  // ============ TAB SWITCHING ============
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach(t => {
+    t.addEventListener('click', () => {
+      tabs.forEach(x => x.classList.remove('active'));
+      panels.forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      const id = t.dataset.tab;
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  });
+
+  // ============ IN-APP VIDEO PLAYER ============
+  // Intercepts all video links and opens them in a contained overlay with a "Back" button
+  const overlay = document.getElementById('video-overlay');
+  const overlayFrame = document.getElementById('video-overlay-frame');
+  const overlayTitle = document.getElementById('video-overlay-title');
+  const overlayBack = document.getElementById('video-overlay-back');
+
+  function youtubeEmbedUrl(url) {
+    // Convert YouTube watch/short URLs to embed URLs that play inline
+    let videoId = null;
+    const watchMatch = url.match(/[?&]v=([A-Za-z0-9_-]+)/);
+    const shortMatch = url.match(/youtube\.com\/shorts\/([A-Za-z0-9_-]+)/);
+    const youtuMatch = url.match(/youtu\.be\/([A-Za-z0-9_-]+)/);
+    if (watchMatch) videoId = watchMatch[1];
+    else if (shortMatch) videoId = shortMatch[1];
+    else if (youtuMatch) videoId = youtuMatch[1];
+    if (!videoId) return null;
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&playsinline=1&modestbranding=1`;
+  }
+
+  function isVideoLink(a) {
+    if (!a || !a.href) return false;
+    const href = a.href;
+    return /youtube\.com|youtu\.be/.test(href) || a.classList.contains('wk-vid') || a.classList.contains('game-vid') || a.classList.contains('video-link');
+  }
+
+  function openVideo(url, title) {
+    const embed = youtubeEmbedUrl(url);
+    if (!embed) {
+      // Fallback for non-YouTube videos: open in new tab (rare in this app)
+      window.open(url, '_blank');
+      return;
+    }
+    overlayFrame.src = embed;
+    overlayTitle.textContent = title || 'Biking video';
+    overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVideo() {
+    overlay.classList.remove('show');
+    overlayFrame.src = ''; // stop the video
+    document.body.style.overflow = '';
+  }
+
+  overlayBack.addEventListener('click', closeVideo);
+
+  // Close on escape key (for desktop/keyboard users)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('show')) {
+      closeVideo();
+    }
+  });
+
+  // Intercept all video link clicks
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (!a) return;
+    if (a.closest('#video-overlay')) return; // ignore clicks inside overlay
+    // Skip Suno song links — those should still open externally
+    if (/suno\.com/.test(a.href)) return;
+    if (isVideoLink(a)) {
+      e.preventDefault();
+      const title = a.textContent.trim().replace(/^▶\s*/, '');
+      openVideo(a.href, title);
+    }
+  });
+
+  // ============ PWA INSTALL HINT ============
+  // Show install hint to iOS Safari users who haven't installed yet
+  function isiOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  }
+  function isStandalone() {
+    return window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+  }
+  if (isiOS() && !isStandalone() && !localStorage.getItem('hideInstallHint')) {
+    setTimeout(() => {
+      document.getElementById('install-hint').style.display = 'block';
+    }, 1500);
+  }
+
+  // ============ SERVICE WORKER (for offline use) ============
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {/* silent fail */});
+    });
+  }
+</script>
+
+<script>
+(function() {
+  var STORAGE_KEY = 'songs-biking-nicolas';
+  var GRADIENT = 'linear-gradient(135deg, #4a7c2c, #2d4a1b)';
+
+  function getSongs() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+    catch(e) { return []; }
+  }
+  function saveSongs(songs) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(songs)); return true; }
+    catch(e) { alert('Could not save. Storage may be full or unavailable.'); return false; }
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function render() {
+    var container = document.getElementById('user-songs-list');
+    if (!container) return;
+    var songs = getSongs();
+    if (!songs.length) {
+      container.innerHTML = '<p class="user-songs-empty">No songs yet — tap "Add a Suno Song" to add your first one.</p>';
+      return;
+    }
+    var html = '<h3 style="margin-top:1.4rem; margin-bottom:0.6rem">Your Songs</h3>';
+    html += '<div class="card-grid">';
+    songs.forEach(function(s) {
+      html += '<div class="card song-card">';
+      html += '<div class="card-icon" style="background:' + GRADIENT + '; color:#fff">🎵</div>';
+      html += '<h3>' + esc(s.title) + '</h3>';
+      html += '<a class="play-button" href="' + esc(s.url) + '" target="_blank" rel="noopener"><span class="icon">▶</span> Play on Suno</a>';
+      html += '<button class="song-card-remove" data-id="' + esc(String(s.id)) + '" type="button">× Remove</button>';
+      html += '</div>';
+    });
+    html += '</div>';
+    container.innerHTML = html;
+    Array.prototype.forEach.call(container.querySelectorAll('.song-card-remove'), function(btn) {
+      btn.addEventListener('click', function() {
+        var id = btn.getAttribute('data-id');
+        var song = getSongs().filter(function(s) { return String(s.id) === id; })[0];
+        if (song && confirm('Remove "' + song.title + '"?')) {
+          saveSongs(getSongs().filter(function(s) { return String(s.id) !== id; }));
+          render();
+        }
+      });
+    });
+  }
+  function show() {
+    document.getElementById('song-title-input').value = '';
+    document.getElementById('song-url-input').value = '';
+    document.getElementById('song-modal').hidden = false;
+    setTimeout(function() {
+      var t = document.getElementById('song-title-input');
+      if (t) t.focus();
+    }, 50);
+  }
+  function hide() {
+    document.getElementById('song-modal').hidden = true;
+  }
+  function save() {
+    var title = document.getElementById('song-title-input').value.trim();
+    var url = document.getElementById('song-url-input').value.trim();
+    if (!title) { alert('Please enter a song title.'); return; }
+    if (!url) { alert('Please paste a Suno URL.'); return; }
+    if (!/^https?:\/\//i.test(url)) { alert('URL must start with http:// or https://'); return; }
+    var songs = getSongs();
+    songs.push({ id: Date.now(), title: title, url: url });
+    if (saveSongs(songs)) { hide(); render(); }
+  }
+  function init() {
+    var b = document.getElementById('add-song-btn'); if (b) b.addEventListener('click', show);
+    var c = document.getElementById('song-modal-cancel'); if (c) c.addEventListener('click', hide);
+    var s = document.getElementById('song-modal-save'); if (s) s.addEventListener('click', save);
+    var m = document.getElementById('song-modal');
+    if (m) m.addEventListener('click', function(e) { if (e.target === m) hide(); });
+    render();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+})();
+</script>
+
+</body>
+</html>
