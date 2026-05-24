@@ -6,17 +6,17 @@
 <title>Nicolas's Biking</title>
 
 <!-- PWA - Installable app on iPad / iPhone home screen -->
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+
+
 <meta name="apple-mobile-web-app-title" content="Biking" />
 <meta name="theme-color" content="#2c6a8d" />
 <meta name="format-detection" content="telephone=no" />
 
 <!-- App icons (inline SVG, base64-encoded so no separate files needed) -->
-<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM3ZmIwNjkiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyZDRhMmIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiByeT0iNDAiIGZpbGw9InVybCgjZykiLz48Y2lyY2xlIGN4PSI5MCIgY3k9IjkwIiByPSI1MCIgZmlsbD0iI2Q0ZGQyYiIvPjxwYXRoIGQ9Ik00MCA5MCBRIDkwIDQwIDE0MCA5MCIgc3Ryb2tlPSIjZmFmNmU5IiBzdHJva2Utd2lkdGg9IjMuNSIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik00MCA5MCBRIDkwIDE0MCAxNDAgOTAiIHN0cm9rZT0iI2ZhZjZlOSIgc3Ryb2tlLXdpZHRoPSIzLjUiIGZpbGw9Im5vbmUiLz48L3N2Zz4=" />
+
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM3ZmIwNjkiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyZDRhMmIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiByeT0iNDAiIGZpbGw9InVybCgjZykiLz48Y2lyY2xlIGN4PSI5MCIgY3k9IjkwIiByPSI1MCIgZmlsbD0iI2Q0ZGQyYiIvPjxwYXRoIGQ9Ik00MCA5MCBRIDkwIDQwIDE0MCA5MCIgc3Ryb2tlPSIjZmFmNmU5IiBzdHJva2Utd2lkdGg9IjMuNSIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik00MCA5MCBRIDkwIDE0MCAxNDAgOTAiIHN0cm9rZT0iI2ZhZjZlOSIgc3Ryb2tlLXdpZHRoPSIzLjUiIGZpbGw9Im5vbmUiLz48L3N2Zz4=" />
-<link rel="manifest" href="manifest.json" />
+
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -936,27 +936,243 @@
 }
 .song-card-remove:hover { color: #c73e3a; }
 
+
+/* ===== iPad / iOS scroll & touch fixes ===== */
+html {
+  -webkit-text-size-adjust: 100%;
+  height: 100%;
+}
+body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+/* Prevent horizontal-scroll on tab nav from capturing vertical scroll */
+nav.tabs {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+}
+/* Make sticky nav less aggressive on small screens / iPads */
+@media (max-width: 900px) {
+  nav.tabs {
+    position: relative !important;
+    top: auto !important;
+  }
+}
+/* Bigger tap targets on tab buttons */
+.tab-btn {
+  min-height: 48px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+/* Ensure modal/overlay never blocks scroll once closed (legacy) */
+[hidden] { display: none !important; }
+/* Disable user-select on tab buttons to prevent text selection on long tap */
+.tab-btn { -webkit-user-select: none; user-select: none; }
+
+
+/* ===== Song manager (inline form, iPad-friendly) ===== */
+.song-add-inline {
+  background: linear-gradient(135deg, var(--cream-deep, #f0eada), #fff);
+  border: 2px solid var(--brass, #c9a91f);
+  border-radius: 18px;
+  padding: 1.2rem 1.1rem;
+  margin: 1rem 0 1.5rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+}
+.song-add-inline h3 { margin: 0 0 0.75rem; font-size: 1.15rem; }
+.song-add-inline-row { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 0.6rem; }
+.song-add-inline label {
+  font-weight: 700;
+  color: var(--ink, #2c2818);
+  font-size: 0.95rem;
+}
+.song-add-inline input {
+  width: 100%;
+  padding: 0.9rem 0.85rem;
+  font-size: 17px; /* prevents iOS zoom-in on focus */
+  font-family: inherit;
+  border: 2px solid var(--ink-soft, #6b6754);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink, #2c2818);
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+  min-height: 48px;
+}
+.song-add-inline input:focus {
+  outline: none;
+  border-color: var(--brass, #c9a91f);
+  box-shadow: 0 0 0 3px rgba(201,169,31,0.18);
+}
+.song-add-inline-btn {
+  background: linear-gradient(135deg, #4a9c8f, #2d6e63);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.95rem 1.4rem;
+  font-size: 17px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  min-height: 50px;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.song-add-inline-btn:active { transform: translateY(1px); }
+.song-add-inline-status {
+  margin-top: 0.6rem;
+  font-size: 0.92rem;
+  min-height: 1.4em;
+  padding: 0.4rem 0;
+  font-weight: 600;
+}
+.song-add-inline-status.success { color: #2d6e63; }
+.song-add-inline-status.error { color: #c73e3a; }
+
+/* Song cards in user list */
+.user-songs-empty {
+  text-align: center;
+  color: var(--ink-soft, #6b6754);
+  font-style: italic;
+  padding: 1rem;
+}
+.song-card-play {
+  display: inline-block;
+  background: linear-gradient(135deg, #4a9c8f, #2d6e63);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.85rem 1.2rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  margin-top: 0.4rem;
+  min-height: 48px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  width: auto;
+  text-align: center;
+}
+.song-card-play:active { transform: translateY(1px); }
+.song-card-remove {
+  display: block;
+  margin-top: 0.6rem;
+  background: transparent;
+  color: var(--ink-soft, #6b6754);
+  border: 1.5px solid var(--ink-soft, #6b6754);
+  border-radius: 10px;
+  padding: 0.55rem 0.95rem;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  min-height: 40px;
+  -webkit-tap-highlight-color: transparent;
+}
+.song-card-remove:active { transform: translateY(1px); }
+
+/* Hide old modal (we replace it but leave the markup safe) */
+.song-modal-overlay { display: none !important; }
+
+
+.sail-icon, .ball-icon, .kayak-icon, .sport-icon { display: none !important; }
+
+/* ===== Universal nav + fade gradient (consistency across all playbooks) ===== */
+nav.tabs {
+  position: relative;
+  background: var(--cream-deep, #f0eada);
+  border-bottom: 3px solid var(--navy, #1c3a5e);
+  z-index: 10;
+  /* Wrap container for fade gradient */
+}
+.tabs-scroll-container {
+  position: relative;
+  overflow: hidden;
+}
+.tabs-scroll-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, var(--cream-deep, #f0eada));
+  z-index: 2;
+}
+nav.tabs .tabs-inner {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+  padding: 0.5rem 0.4rem;
+  scrollbar-width: thin;
+}
+nav.tabs .tabs-inner::-webkit-scrollbar { height: 4px; }
+nav.tabs .tabs-inner::-webkit-scrollbar-track { background: transparent; }
+nav.tabs .tabs-inner::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.15); border-radius: 2px;
+}
+
+/* Standardize tab button look across all apps */
+.tab-btn {
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  color: var(--ink, #2c2818);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: background 0.15s ease;
+}
+.tab-btn:hover { background: rgba(0,0,0,0.04); }
+.tab-btn.active {
+  background: var(--navy, #1c3a5e);
+  color: var(--cream, #f8f4ea);
+}
 </style>
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="mobile-web-app-capable" content="yes">
 </head>
 <body>
 
 <header class="top-banner">
-  <h1>Nicolas's Biking Playbook <span class="ball-icon"></span></h1>
-  <p class="sub">A picture guide to the rules, the field, the strokes, and the joy of the game.</p>
+  <h1>Nicolas's Biking Playbook</h1>
+  <p class="sub">A picture guide to the bike, the moves, the rules of the road, and the joy of the ride.</p>
 </header>
 
-<nav class="tabs" aria-label="Sections">
+<nav class="tabs"><div class="tabs-scroll-container"><div class="tabs-inner">
   <div class="tab-list" role="tablist">
     <button class="tab-btn active" data-tab="welcome">🏁 Start Here</button>
     <button class="tab-btn" data-tab="bike">🚴 The Bike</button>
-    <button class="tab-btn" data-tab="rules">📋 Rules</button>
+    <button class="tab-btn" data-tab="rules">📋 Rules &amp; Safety</button>
     <button class="tab-btn" data-tab="skills">🎯 Skills &amp; Moves</button>
     <button class="tab-btn" data-tab="program">📅 Lesson Plans</button>
     <button class="tab-btn" data-tab="games">🎮 Fun Games</button>
     <button class="tab-btn" data-tab="story">📖 Biking Story</button>
     <button class="tab-btn" data-tab="songs">🎵 Biking Songs</button>
   </div>
-</nav>
+</div></div></nav>
 
 <main>
 
@@ -966,44 +1182,44 @@
     Welcome, Nicolas. You already know how to ride a bike — or you're about to. Now we're going to learn <em>everything that goes with it</em> — every part of the bike, every rule of the road, every skill that makes a rider good. Take your time. Look at the pictures. Watch a video. Try a drill. Biking is not about being perfect. It's about getting curious, building good habits, and finding the joy of two wheels and the open road. And the best part — biking is a freedom you can have for the rest of your life.
   </div>
 
-  <h2>What's inside this playbook</h2>
-  <div class="card-grid" style="margin-top:1.2rem">
-    <div class="card">
-      <div class="card-icon">🏟️</div>
-      <h3>The Court</h3>
-      <p class="summary">A picture map of the bike with every part named — frame, brakes, gears, helmet, all of it.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">📋</div>
-      <h3>The Rules</h3>
-      <p class="summary">10 simple rules. One picture for each. Watch a short video to see it in action.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🎯</div>
-      <h3>Skills &amp; Moves</h3>
-      <p class="summary">Forehand, backhand, serve, volley, overhead. How to grip, how to swing, how to follow through.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">📅</div>
-      <h3>Lesson Plans</h3>
-      <p class="summary">Four lesson formats that roll in over the year — one at a time. Same predictable shape every time, so what's inside can stay fresh. 30-min and 60-min versions for Daddy and Coach.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🎮</div>
-      <h3>Fun Games</h3>
-      <p class="summary">12 silly, challenging, joyful games to play with Daddy or Coach when practice needs a smile.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">📖</div>
-      <h3>Your Biking Story</h3>
-      <p class="summary">A picture story about a biking day — what to expect, what to do, what to feel.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🎵</div>
-      <h3>Biking Songs</h3>
-      <p class="summary">Custom Suno songs made just for you. Listen before practice to get ready, or after a great game to celebrate. Add new ones anytime.</p>
-    </div>
+  <h2 style="margin: 2rem 0 1.2rem">What's inside this playbook</h2>
+<div class="card-grid welcome-cards-grid">
+  <div class="card">
+    <div class="card-icon" style="background: linear-gradient(135deg, var(--navy, #1c3a5e), var(--navy-deep, #0f2444)); color: var(--cream, #f8f4ea)">🚴</div>
+    <h3>The Bike</h3>
+    <p class="summary">A picture map of a bike with every part named — frame, brakes, gears, helmet, all of it.</p>
   </div>
+  <div class="card">
+    <div class="card-icon" style="background: linear-gradient(135deg, var(--navy, #1c3a5e), var(--navy-deep, #0f2444)); color: var(--cream, #f8f4ea)">📋</div>
+    <h3>Rules &amp; Safety</h3>
+    <p class="summary">10 rules of the road. Helmet always. Hand signals. ABC bike check. The basics of safe riding.</p>
+  </div>
+  <div class="card">
+    <div class="card-icon" style="background: linear-gradient(135deg, var(--navy, #1c3a5e), var(--navy-deep, #0f2444)); color: var(--cream, #f8f4ea)">🎯</div>
+    <h3>Skills &amp; Moves</h3>
+    <p class="summary">Starting. Stopping. Steering. Shifting gears. Hand signals. The moves every rider knows.</p>
+  </div>
+  <div class="card">
+    <div class="card-icon" style="background: linear-gradient(135deg, var(--navy, #1c3a5e), var(--navy-deep, #0f2444)); color: var(--cream, #f8f4ea)">📅</div>
+    <h3>Lesson Plans</h3>
+    <p class="summary">Four lesson formats that roll in over the year — from driveway basics to longer rides on a bike path.</p>
+  </div>
+  <div class="card">
+    <div class="card-icon" style="background: linear-gradient(135deg, var(--navy, #1c3a5e), var(--navy-deep, #0f2444)); color: var(--cream, #f8f4ea)">🎮</div>
+    <h3>Fun Games</h3>
+    <p class="summary">Brother games. Slow race. Cone slalom. Obstacle course. Things to play in the driveway or yard.</p>
+  </div>
+  <div class="card">
+    <div class="card-icon" style="background: linear-gradient(135deg, var(--navy, #1c3a5e), var(--navy-deep, #0f2444)); color: var(--cream, #f8f4ea)">📖</div>
+    <h3>Your Biking Story</h3>
+    <p class="summary">A picture story about a bike ride day — what to expect, what to do, what to feel.</p>
+  </div>
+  <div class="card">
+    <div class="card-icon" style="background: linear-gradient(135deg, var(--navy, #1c3a5e), var(--navy-deep, #0f2444)); color: var(--cream, #f8f4ea)">🎵</div>
+    <h3>Biking Songs</h3>
+    <p class="summary">Custom Suno songs made just for you. Listen before a ride to get ready, or after a great day on the bike.</p>
+  </div>
+</div>
 
   <div class="pull-quote">
     The best rider is not the fastest one. The best rider is the one who keeps showing up, keeps building skills, and remembers to smile after a great ride.
@@ -1187,65 +1403,112 @@
       <h3>1. Helmet on, every ride</h3>
       <p class="summary">No helmet = no riding. Two finger widths above the eyebrows, straps in a V around the ears, snug under the chin (one finger between strap and chin). Replace after any crash.</p>
       <span class="cue">"Helmet first. Always."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=helmet+on+every+ride+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">🚦</div>
       <h3>2. Ride WITH traffic</h3>
       <p class="summary">On the road, ride in the SAME direction as cars. Stay as far right as is safe. Single file when riding with someone else.</p>
       <span class="cue">"Same way as cars."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=ride+with+traffic+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">🛑</div>
       <h3>3. Stop at stop signs</h3>
       <p class="summary">Bikes follow car rules. STOP at every stop sign. Look LEFT, then RIGHT, then LEFT AGAIN before crossing.</p>
       <span class="cue">"Look both ways twice."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=stop+at+stop+signs+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">✋</div>
       <h3>4. Hand signals</h3>
       <p class="summary"><strong>LEFT turn:</strong> stick left arm STRAIGHT out. <strong>RIGHT turn:</strong> left arm BENT up at the elbow (or right arm straight out). <strong>STOP:</strong> left arm bent DOWN at the elbow.</p>
       <span class="cue">"Tell people what you're doing."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=hand+signals+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">👁️</div>
       <h3>5. Look before you turn</h3>
       <p class="summary">Always look OVER YOUR SHOULDER before changing direction. Then signal. Then turn. Look-signal-turn — that order.</p>
       <span class="cue">"Look. Signal. Turn."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=look+before+you+turn+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">🪞</div>
       <h3>6. Stay seen</h3>
       <p class="summary">Wear bright colors (especially yellow). Use lights at night or in the rain. Make eye contact with drivers at intersections.</p>
       <span class="cue">"Bright clothes. Eye contact."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=stay+seen+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">🚸</div>
       <h3>7. Sidewalks &amp; bike paths</h3>
       <p class="summary">On the sidewalk: SLOW DOWN. Walkers always have right of way. Say "On your left!" before passing. On bike paths: same — slow down for walkers.</p>
       <span class="cue">"Say 'on your left.'"</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=sidewalks+bike+paths+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">🤲</div>
       <h3>8. Two hands on the bars</h3>
       <p class="summary">No riding "no hands" until you're MUCH more experienced. Keep both hands on the handlebars, ready to brake.</p>
       <span class="cue">"Two hands. Always."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=two+hands+on+the+bars+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">🛞</div>
       <h3>9. Bike check before EVERY ride</h3>
       <p class="summary"><strong>A-B-C check:</strong> <strong>A</strong>ir in the tires (squeeze them). <strong>B</strong>rakes work (squeeze the levers). <strong>C</strong>hain on (look down). Takes 30 seconds. Saves crashes.</p>
       <span class="cue">"A. B. C. Then go."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=bike+check+before+every+ride+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">🤝</div>
       <h3>10. Be a great rider</h3>
       <p class="summary">Wave to other riders. Help if someone falls. Don't show off to make others feel small. Biking is more fun when everyone is welcome.</p>
       <span class="cue">"Wave. Help. Be kind."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=be+a+great+rider+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
-  </div>
+  
+      <a class="video-link" href="https://www.youtube.com/results?search_query=kids+bike+helmet+fitting+safety" target="_blank" rel="noopener">▶ Watch</a>
+    </div>
 
   <div class="pull-quote">
     A bike is freedom on two wheels. The rules are not to slow you down — they're what let you ride further, faster, and for the rest of your life.
+  </div>
+
+  <h3 style="margin: 2.5rem 0 0.8rem">Watch &amp; learn the rules</h3>
+  <p style="color:var(--ink-soft); margin-bottom:1rem">Short videos that explain how the game is played. Watch a couple before your first session.</p>
+  <div class="card-grid">
+  <div class="card">
+    <div class="card-icon">🎬</div>
+    <h3>Kids Bike Safety</h3>
+    <a class="video-link" href="https://www.youtube.com/results?search_query=kids+bike+safety+rules+tutorial" target="_blank" rel="noopener">▶ Watch</a>
+  </div>
+  <div class="card">
+    <div class="card-icon">🎬</div>
+    <h3>Hand Signals</h3>
+    <a class="video-link" href="https://www.youtube.com/results?search_query=bicycle+hand+signals+demonstration" target="_blank" rel="noopener">▶ Watch</a>
+  </div>
+  <div class="card">
+    <div class="card-icon">🎬</div>
+    <h3>ABC Bike Check</h3>
+    <a class="video-link" href="https://www.youtube.com/results?search_query=abc+bike+check+tutorial+kids" target="_blank" rel="noopener">▶ Watch</a>
+  </div>
+  <div class="card">
+    <div class="card-icon">🎬</div>
+    <h3>Bike Rules of the Road</h3>
+    <a class="video-link" href="https://www.youtube.com/results?search_query=bicycle+rules+of+the+road+kids" target="_blank" rel="noopener">▶ Watch</a>
+  </div>
   </div>
 </section>
 
@@ -1262,38 +1525,52 @@
       <h3>Starting (the push-off)</h3>
       <p class="summary">Pedal up to the 2 o'clock position. Foot ON the pedal. Push DOWN as you push off with the other foot. The down-push is what gets you going.</p>
       <span class="cue">"Pedal at 2. Push down."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=starting+the+pushoff+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">🛑</div>
       <h3>Stopping (smooth)</h3>
       <p class="summary">Squeeze BOTH brake levers TOGETHER — equal pressure on each. Slide back on the seat. Foot down only AFTER you've stopped.</p>
       <span class="cue">"Both brakes. Foot last."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=stopping+smooth+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">↩️</div>
       <h3>Turning</h3>
       <p class="summary">LOOK where you want to go (your body follows your eyes). Lean slightly into the turn. Smooth gentle steer — don't yank the bars.</p>
       <span class="cue">"Look. Lean. Glide."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=turning+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">⚖️</div>
       <h3>Balancing slow</h3>
       <p class="summary">Looking ahead helps balance more than looking down. The slower you go, the harder it gets. Keep some pedal pressure on at all times.</p>
       <span class="cue">"Eyes up. Keep pedaling."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=balancing+slow+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">⚙️</div>
       <h3>Shifting gears</h3>
       <p class="summary"><strong>LOW gear</strong> (easy) = for hills going UP. <strong>HIGH gear</strong> (hard) = for flat or downhill. Shift while pedaling. Don't shift while standing still.</p>
       <span class="cue">"Up = low. Flat = high."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=shifting+gears+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">✋</div>
       <h3>Signaling</h3>
       <p class="summary">Stick your arm out for left turn. Bent up for right turn. Bent down for stop. Practice in the driveway before you need them.</p>
       <span class="cue">"Tell people first."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=signaling+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
-  </div>
+  
+      <a class="video-link" href="https://www.youtube.com/results?search_query=kids+bike+starting+push+off+tutorial" target="_blank" rel="noopener">▶ Watch</a>
+    </div>
 
   <h3 style="margin:2rem 0 0.8rem">The Helmet Check (every ride)</h3>
   <div class="card">
@@ -1326,32 +1603,44 @@
       <h3>See it coming</h3>
       <p class="summary">Look ahead. If you might need to stop, START thinking about it now.</p>
       <span class="cue">"Plan ahead."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=see+it+coming+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">2️⃣</div>
       <h3>Signal</h3>
       <p class="summary">Stick your hand out (the STOP signal) so others know.</p>
       <span class="cue">"Tell them."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=signal+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">3️⃣</div>
       <h3>Squeeze BOTH brakes</h3>
       <p class="summary">Equal pressure on both levers. Front brake does most of the stopping; rear keeps you stable.</p>
       <span class="cue">"Both together."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=squeeze+both+brakes+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">4️⃣</div>
       <h3>Shift weight back</h3>
       <p class="summary">Slide your butt slightly back on the seat. This keeps the front wheel grounded.</p>
       <span class="cue">"Weight back."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=shift+weight+back+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">5️⃣</div>
       <h3>Foot down</h3>
       <p class="summary">Only after the bike has STOPPED. Pick your stronger leg. Put that foot flat on the ground.</p>
       <span class="cue">"Foot last."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=foot+down+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
-  </div>
+  
+      <a class="video-link" href="https://www.youtube.com/results?search_query=see+it+coming+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
+    </div>
 </section>
 
 <!-- 52-WEEK PROGRAM -->
@@ -1644,68 +1933,92 @@
       <h3>Obstacle Course</h3>
       <p class="summary">Set up cones, sticks, chalk lines. Weave, jump curbs (small ones), ride over a board, stop at a line. Time it.</p>
       <span class="cue">"Smooth. Don't stop."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=obstacle+course+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">8️⃣</div>
       <h3>Figure-8 Race</h3>
       <p class="summary">Two cones 15 feet apart. Make a figure-8 between them. 3 laps = winner. Builds tight turns.</p>
       <span class="cue">"Lean in. Look out."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=figure8+race+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">👣</div>
       <h3>Foot Down Race</h3>
       <p class="summary">Ride in a chalk-drawn circle. Put a foot down = OUT. Last rider in the circle wins.</p>
       <span class="cue">"No foot down."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=foot+down+race+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">⚡</div>
       <h3>Sprint Race</h3>
       <p class="summary">Mark a start and finish 50 yards apart. FASTEST to finish wins. (Counterpart to the slow race.)</p>
       <span class="cue">"Stand up. Pedal hard."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=sprint+race+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">⛰️</div>
       <h3>Hill Repeats</h3>
       <p class="summary">Find a hill. Ride UP. Coast DOWN. Repeat 3 times. Builds power.</p>
       <span class="cue">"Easy gear. Steady pedal."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=hill+repeats+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">⏱️</div>
       <h3>Time Trial</h3>
       <p class="summary">Pick a loop (driveway lap, around the block). Time it. Try to beat the time next week.</p>
       <span class="cue">"Beat last week's time."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=time+trial+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">🚂</div>
       <h3>Follow the Leader</h3>
       <p class="summary">Daddy leads. Nicolas follows EXACTLY — same line, same speed, same hand signals. Then switch.</p>
       <span class="cue">"Match the leader."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=follow+the+leader+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">🦵</div>
       <h3>Track Stand</h3>
       <p class="summary">Can you balance the bike at a STAND STILL? No foot down. How many seconds? Hard but cool.</p>
       <span class="cue">"Still + balanced."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=track+stand+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">🪜</div>
       <h3>Bike Limbo</h3>
       <p class="summary">Two cones with a string between them at handlebar height. Ride under it. Lower the string each round.</p>
       <span class="cue">"Duck low."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=bike+limbo+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">🔍</div>
       <h3>Bike Scavenger Hunt</h3>
       <p class="summary">Daddy makes a list ("red mailbox, blue door, biggest tree on the street"). Ride around, find them all. Time it.</p>
       <span class="cue">"Eyes up. Find them."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=bike+scavenger+hunt+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
     <div class="card">
       <div class="card-icon">🏆</div>
       <h3>BMX Tricks (when ready)</h3>
       <p class="summary">Manuals (front wheel up briefly). Bunny hops (both wheels off the ground). LEARN ON GRASS first. Wear all the gear.</p>
       <span class="cue">"Grass first. Gear always."</span>
+    
+      <a class="video-link" href="https://www.youtube.com/results?search_query=bmx+tricks+when+ready+kids+bike" target="_blank" rel="noopener">▶ Watch</a>
     </div>
-  </div>
+  
+      <a class="video-link" href="https://www.youtube.com/results?search_query=bike+obstacle+course+backyard+kids" target="_blank" rel="noopener">▶ Watch</a>
+    </div>
 
   <h3 style="margin: 2rem 0 0.7rem">Watch fun bike games in action</h3>
   <div class="card-grid">
@@ -1835,8 +2148,27 @@
     Music is part of the ride. Songs help Nicolas preview what's coming, regulate his body between rides, and celebrate the joy of a great day on the bike. Tap to play. Add new ones any time.
   </div>
 <div class="user-songs-section">
-  <button class="add-song-btn" id="add-song-btn" type="button">+ Add a Suno Song</button>
-  <div id="user-songs-list"></div>
+  
+<div class="card song-add-inline" id="song-add-inline">
+  <h3>🎵 Add a Suno Song</h3>
+  <p style="margin: 0 0 0.85rem; color: var(--ink-soft, #6b6754); font-size: 0.95rem;">
+    Made a song on Suno? Paste the share link here so it lives in your playlist forever.
+  </p>
+  <div class="song-add-inline-row">
+    <label for="song-title-input">Song Title</label>
+    <input type="text" id="song-title-input" placeholder="e.g. My Hype Song" autocomplete="off" autocapitalize="words" />
+  </div>
+  <div class="song-add-inline-row">
+    <label for="song-url-input">Suno URL</label>
+    <input type="url" id="song-url-input" placeholder="https://suno.com/s/..." autocomplete="off" autocapitalize="none" inputmode="url" />
+  </div>
+  <button class="song-add-inline-btn" id="song-add-inline-btn" type="button">Add to Playlist</button>
+  <div class="song-add-inline-status" id="song-add-status" role="status" aria-live="polite"></div>
+</div>
+<div id="user-songs-list"></div>
+
+
+  
 </div>
 
 
@@ -1905,21 +2237,6 @@
 </section>
 
 
-
-<div class="song-modal-overlay" id="song-modal" hidden>
-  <div class="song-modal-box" role="dialog" aria-modal="true" aria-labelledby="song-modal-title">
-    <h3 id="song-modal-title">Add a Suno Song</h3>
-    <label class="song-modal-label" for="song-title-input">Song Title</label>
-    <input type="text" id="song-title-input" placeholder="e.g. Hype Song" autocomplete="off">
-    <label class="song-modal-label" for="song-url-input">Suno URL</label>
-    <input type="url" id="song-url-input" placeholder="https://suno.com/s/...">
-    <p class="song-modal-hint">Paste the share link from Suno (the URL of the song page).</p>
-    <div class="song-modal-actions">
-      <button class="song-modal-btn cancel" id="song-modal-cancel" type="button">Cancel</button>
-      <button class="song-modal-btn save"   id="song-modal-save"   type="button">Save</button>
-    </div>
-  </div>
-</div>
 
 </main>
 
@@ -2054,9 +2371,11 @@
 </script>
 
 <script>
-(function() {
+(function(){
+  // === Robust Suno song manager ===
+  // Inline form (no modal), works in PWA standalone mode on iPad.
   var STORAGE_KEY = 'songs-biking-nicolas';
-  var GRADIENT = 'linear-gradient(135deg, #4a7c2c, #2d4a1b)';
+  var GRADIENT = 'linear-gradient(135deg, #4a9c8f, #2d6e63)';
 
   function getSongs() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
@@ -2064,33 +2383,47 @@
   }
   function saveSongs(songs) {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(songs)); return true; }
-    catch(e) { alert('Could not save. Storage may be full or unavailable.'); return false; }
+    catch(e) { return false; }
   }
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function(c) {
       return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
     });
   }
+  function openSong(url) {
+    // Works in PWA standalone mode on iOS too
+    try {
+      var w = window.open(url, '_blank', 'noopener');
+      if (!w || w.closed || typeof w.closed === 'undefined') {
+        window.location.href = url;
+      }
+    } catch(e) {
+      window.location.href = url;
+    }
+  }
   function render() {
     var container = document.getElementById('user-songs-list');
     if (!container) return;
     var songs = getSongs();
     if (!songs.length) {
-      container.innerHTML = '<p class="user-songs-empty">No songs yet — tap "Add a Suno Song" to add your first one.</p>';
+      container.innerHTML = '<p class="user-songs-empty">No songs added yet — paste a Suno link above to add your first one.</p>';
       return;
     }
-    var html = '<h3 style="margin-top:1.4rem; margin-bottom:0.6rem">Your Songs</h3>';
-    html += '<div class="card-grid">';
+    var h = '<h3 style="margin-top:1.4rem; margin-bottom:0.6rem">Your Songs</h3>';
+    h += '<div class="card-grid">';
     songs.forEach(function(s) {
-      html += '<div class="card song-card">';
-      html += '<div class="card-icon" style="background:' + GRADIENT + '; color:#fff">🎵</div>';
-      html += '<h3>' + esc(s.title) + '</h3>';
-      html += '<a class="play-button" href="' + esc(s.url) + '" target="_blank" rel="noopener"><span class="icon">▶</span> Play on Suno</a>';
-      html += '<button class="song-card-remove" data-id="' + esc(String(s.id)) + '" type="button">× Remove</button>';
-      html += '</div>';
+      h += '<div class="card song-card">';
+      h += '<div class="card-icon" style="background:' + GRADIENT + '; color:#fff">🎵</div>';
+      h += '<h3>' + esc(s.title) + '</h3>';
+      h += '<button class="song-card-play" data-url="' + esc(s.url) + '" type="button">▶ Play on Suno</button>';
+      h += '<button class="song-card-remove" data-id="' + esc(String(s.id)) + '" type="button">× Remove</button>';
+      h += '</div>';
     });
-    html += '</div>';
-    container.innerHTML = html;
+    h += '</div>';
+    container.innerHTML = h;
+    Array.prototype.forEach.call(container.querySelectorAll('.song-card-play'), function(btn) {
+      btn.addEventListener('click', function() { openSong(btn.getAttribute('data-url')); });
+    });
     Array.prototype.forEach.call(container.querySelectorAll('.song-card-remove'), function(btn) {
       btn.addEventListener('click', function() {
         var id = btn.getAttribute('data-id');
@@ -2102,39 +2435,66 @@
       });
     });
   }
-  function show() {
-    document.getElementById('song-title-input').value = '';
-    document.getElementById('song-url-input').value = '';
-    document.getElementById('song-modal').hidden = false;
-    setTimeout(function() {
-      var t = document.getElementById('song-title-input');
-      if (t) t.focus();
-    }, 50);
+  function setStatus(msg, kind) {
+    var el = document.getElementById('song-add-status');
+    if (!el) return;
+    el.textContent = msg;
+    el.className = 'song-add-inline-status ' + (kind || '');
+    if (kind === 'success') {
+      setTimeout(function(){
+        if (el.textContent === msg) { el.textContent = ''; el.className = 'song-add-inline-status'; }
+      }, 3500);
+    }
   }
-  function hide() {
-    document.getElementById('song-modal').hidden = true;
-  }
-  function save() {
-    var title = document.getElementById('song-title-input').value.trim();
-    var url = document.getElementById('song-url-input').value.trim();
-    if (!title) { alert('Please enter a song title.'); return; }
-    if (!url) { alert('Please paste a Suno URL.'); return; }
-    if (!/^https?:\/\//i.test(url)) { alert('URL must start with http:// or https://'); return; }
+  function addSong() {
+    var titleEl = document.getElementById('song-title-input');
+    var urlEl = document.getElementById('song-url-input');
+    var title = (titleEl.value || '').trim();
+    var url = (urlEl.value || '').trim();
+    if (!title) { setStatus('Please add a song title.', 'error'); titleEl.focus(); return; }
+    if (!url) { setStatus('Please paste the Suno URL.', 'error'); urlEl.focus(); return; }
+    if (!/^https?:\/\//i.test(url)) { setStatus('URL must start with https://', 'error'); urlEl.focus(); return; }
     var songs = getSongs();
     songs.push({ id: Date.now(), title: title, url: url });
-    if (saveSongs(songs)) { hide(); render(); }
-  }
-  function init() {
-    var b = document.getElementById('add-song-btn'); if (b) b.addEventListener('click', show);
-    var c = document.getElementById('song-modal-cancel'); if (c) c.addEventListener('click', hide);
-    var s = document.getElementById('song-modal-save'); if (s) s.addEventListener('click', save);
-    var m = document.getElementById('song-modal');
-    if (m) m.addEventListener('click', function(e) { if (e.target === m) hide(); });
+    if (!saveSongs(songs)) { setStatus('Could not save (storage may be full).', 'error'); return; }
+    titleEl.value = ''; urlEl.value = '';
+    setStatus('✓ Added "' + title + '" to your playlist.', 'success');
     render();
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else { init(); }
+  function init() {
+    var btn = document.getElementById('song-add-inline-btn');
+    if (btn) btn.addEventListener('click', addSong);
+    var urlEl = document.getElementById('song-url-input');
+    if (urlEl) {
+      urlEl.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') { e.preventDefault(); addSong(); }
+      });
+    }
+    render();
+  }
+  if (document.readyState !== 'loading') init();
+  else document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+
+
+<script>
+(function(){
+  function scrollActiveIntoView() {
+    var active = document.querySelector('nav.tabs .tab-btn.active');
+    if (active && active.scrollIntoView) {
+      try { active.scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'center'}); }
+      catch(e) {}
+    }
+  }
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.tab-btn')) {
+      setTimeout(scrollActiveIntoView, 50);
+    }
+  });
+  // On load: scroll active tab into view
+  if (document.readyState !== 'loading') scrollActiveIntoView();
+  else document.addEventListener('DOMContentLoaded', scrollActiveIntoView);
 })();
 </script>
 
